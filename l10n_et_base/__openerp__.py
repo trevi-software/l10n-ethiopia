@@ -1,12 +1,12 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 ##############################################################################
 #
 #    Copyright (C) 2016 Clear ICT Solutions <info@clearict.com>.
 #    Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
 #    All Rights Reserved.
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
+#    This program is free software: you can redistribute it and/or modify it
+#    under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
@@ -31,8 +31,8 @@ Base Module Localization for Ethiopia
     - Amharic version of partner name
     - Amharic version of company name
     """,
-    'author':'Clear ICT Solutions',
-    'website':'http://www.clearict.com',
+    'author': 'Clear ICT Solutions',
+    'website': 'http://www.clearict.com',
     'depends': [
         'base',
     ],
