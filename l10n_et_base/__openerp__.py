@@ -24,6 +24,7 @@
     'name': 'Ethiopia - Base',
     'version': '1.0',
     'category': 'Localization',
+    'license': 'AGPL-3',
     'description': """
 Base Module Localization for Ethiopia
 =====================================
@@ -31,7 +32,7 @@ Base Module Localization for Ethiopia
     - Amharic version of partner name
     - Amharic version of company name
     """,
-    'author': 'Clear ICT Solutions',
+    'author': 'Clear ICT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.clearict.com',
     'depends': [
         'base',
