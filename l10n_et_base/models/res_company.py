@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright (C) 2016 Clear ICT Solutions <info@clearict.com>.
-#    Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
+#    Copyright (C) 2011,2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
 #    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify it
@@ -20,5 +20,21 @@
 #
 ##############################################################################
 
-# flake8: noqa
-from . import models
+from openerp.osv import fields, osv
+
+
+class res_company(osv.Model):
+
+    _inherit = 'res.company'
+
+    _columns = {
+        # Re-define from openerp/addons/base/res/res_company.py to limit size
+        'vat': fields.related(
+            'partner_id', 'vat', string="Tax ID", type="char", size=10),
+
+        'vat_number': fields.char(
+            'VAT', size=10, select=True, help="Tax Identification Number"),
+        'ethiopic_name': fields.related(
+            'partner_id', 'ethiopic_name', string='Ethiopic Name',
+            size=1024, store=True, type='char'),
+    }

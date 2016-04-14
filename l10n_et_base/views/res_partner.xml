@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        
+
         <record id="view_res_bank_form" model="ir.ui.view">
             <field name="name">res.bank.inherit.l10n_et</field>
             <field name="model">res.bank</field>
@@ -12,7 +12,7 @@
                 </xpath>
             </field>
         </record>
-        
+
         <record id="view_partner_bank_form" model="ir.ui.view">
             <field name="name">res.partner.bank.inherit.l10n_et</field>
             <field name="model">res.partner.bank</field>
@@ -23,7 +23,7 @@
 	            </xpath>
             </field>
         </record>
-        
+
         <record id="view_partner_form_simple" model="ir.ui.view">
             <field name="name">res.partner.form.inherit.simple</field>
             <field name="model">res.partner</field>
@@ -36,7 +36,7 @@
                 </data>
             </field>
         </record>
-        
+
         <record id="view_partner_form" model="ir.ui.view">
             <field name="name">res.partner.form.inherit</field>
             <field name="model">res.partner</field>
@@ -67,28 +67,6 @@
                                 </group>
                             </group>
                         </div>
-                    </xpath>
-                </data>
-            </field>
-        </record>
-        
-        <record id="view_company_form" model="ir.ui.view">
-            <field name="name">res.company.form.inherit</field>
-            <field name="model">res.company</field>
-            <field name="inherit_id" ref="base.view_company_form"/>
-            <field name="arch" type="xml">
-                <data>
-                    <xpath expr="//field[@name='name']" position="after">
-                        <field name="ethiopic_name" placeholder="ስም በአማርኛ" />
-                    </xpath>
-                    <xpath expr="//field[@name='vat']" position="after">
-                    	<field name="vat_number"/>
-                    </xpath>
-                    <xpath expr="//field[@name='vat']" position="attributes">
-                    	<attribute name="string">TIN</attribute>
-                    </xpath>
-                    <xpath expr="//field[@name='company_registry']" position="attributes">
-                    	<attribute name="string">Registration No.</attribute>
                     </xpath>
                 </data>
             </field>

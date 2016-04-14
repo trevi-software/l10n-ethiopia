@@ -39,7 +39,8 @@ Base Module Localization for Ethiopia
     ],
     'init_xml': [],
     'update_xml': [
-        'res_view.xml',
+        'views/res_company.xml',
+        'views/res_partner.xml',
     ],
     'test': [
     ],

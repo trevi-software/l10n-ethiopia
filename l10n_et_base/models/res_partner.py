@@ -37,30 +37,3 @@ class res_partner(osv.Model):
         'et_city': fields.char('Amharic City', size=256, select=True),
         'pobox': fields.char('P.O. Box', size=16),
     }
-
-
-class res_company(osv.Model):
-
-    _inherit = 'res.company'
-
-    _columns = {
-        # Re-define from openerp/addons/base/res/res_company.py to limit size
-        'vat': fields.related(
-            'partner_id', 'vat', string="Tax ID", type="char", size=10),
-
-        'vat_number': fields.char(
-            'VAT', size=10, select=True, help="Tax Identification Number"),
-        'ethiopic_name': fields.related(
-            'partner_id', 'ethiopic_name', string='Ethiopic Name',
-            size=1024, store=True, type='char'),
-    }
-
-
-class res_country_state(osv.Model):
-
-    _inherit = 'res.country.state'
-
-    _columns = {
-        'ethiopic_name': fields.char('Ethiopic Name', size=256, select=True),
-        'et_code': fields.char('Ethiopic Code', size=16, select=True),
-    }

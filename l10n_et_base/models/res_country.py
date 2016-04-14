@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright (C) 2016 Clear ICT Solutions <info@clearict.com>.
-#    Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
+#    Copyright (C) 2011,2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
 #    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify it
@@ -20,5 +20,14 @@
 #
 ##############################################################################
 
-# flake8: noqa
-from . import models
+from openerp.osv import fields, osv
+
+
+class res_country_state(osv.Model):
+
+    _inherit = 'res.country.state'
+
+    _columns = {
+        'ethiopic_name': fields.char('Ethiopic Name', size=256, select=True),
+        'et_code': fields.char('Ethiopic Code', size=16, select=True),
+    }
