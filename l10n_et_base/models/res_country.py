@@ -20,14 +20,14 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp import fields, models
 
 
-class res_country_state(osv.Model):
+class ResCountryState(models.Model):
 
     _inherit = 'res.country.state'
 
-    _columns = {
-        'ethiopic_name': fields.char('Ethiopic Name', size=256, select=True),
-        'et_code': fields.char('Ethiopic Code', size=16, select=True),
-    }
+    # fields
+    #
+    ethiopic_name = fields.Char(size=256, index=True)
+    et_code = fields.Char(string='Ethiopic Code', size=16, index=True)

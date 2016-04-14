@@ -20,20 +20,20 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp import fields, models
 
 
-class res_partner(osv.Model):
+class ResPartner(models.Model):
 
     _inherit = 'res.partner'
 
-    _columns = {
-        'ethiopic_name': fields.char('Ethiopic Name', size=1024, select=True),
-        'subcity': fields.char('Subcity (Woreda)', size=256, select=True),
-        'kebele': fields.char('Kebele', size=8, select=True),
-        'houseno': fields.char('House No', size=16, select=True),
-        'et_subcity': fields.char(
-            'Amharic Subcity (Woreda)', size=256, select=True),
-        'et_city': fields.char('Amharic City', size=256, select=True),
-        'pobox': fields.char('P.O. Box', size=16),
-    }
+    # fields
+    #
+    ethiopic_name = fields.Char(size=1024, index=True)
+    subcity = fields.Char(string='Subcity (Woreda)', size=256, index=True)
+    kebele = fields.Char(size=8, index=True)
+    houseno = fields.Char(string='House No', size=16, index=True)
+    et_subcity = fields.Char(
+        string='Amharic Subcity (Woreda)', size=256, index=True)
+    et_city = fields.Char(string='Amharic City', size=256, index=True)
+    pobox = fields.Char(string='P.O. Box', size=16)
