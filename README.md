@@ -1,6 +1,6 @@
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/221/7.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-ethiopia-221)
-[![Build Status](https://travis-ci.org/OCA/l10n-ethiopia.svg?branch=7.0)](https://travis-ci.org/OCA/l10n-ethiopia})
-[![Coverage Status](https://coveralls.io/repos/OCA/l10n-ethiopia/badge.svg?branch=7.0&service=github)](https://coveralls.io/github/OCA/l10n-ethiopia?branch=7.0})
+[![Build Status](https://travis-ci.org/OCA/l10n-ethiopia.svg?branch=7.0)](https://travis-ci.org/OCA/l10n-ethiopia)
+[![Coverage Status](https://coveralls.io/repos/OCA/l10n-ethiopia/badge.svg?branch=7.0&service=github)](https://coveralls.io/github/OCA/l10n-ethiopia?branch=7.0)
 [![Code Climate](https://codeclimate.com/github/OCA/l10n-ethiopia/badges/gpa.svg)](https://codeclimate.com/github/OCA/l10n-ethiopia)
 
 # Odoo Ethiopian Localization
