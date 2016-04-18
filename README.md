@@ -18,7 +18,7 @@ addon | version | summary
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/oca/OCA-l10n-ethiopia-7-0/chart/image_png)](https://www.transifex.com/oca/OCA-l10n-ethiopia-7-0)
+[![Transifex Status](https://www.transifex.com/oca/OCA-l10n-ethiopia-8-0/chart/image_png)](https://www.transifex.com/oca/OCA-l10n-ethiopia-8-0)
 
 ----
 
