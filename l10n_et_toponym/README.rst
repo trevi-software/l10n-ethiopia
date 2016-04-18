@@ -33,7 +33,7 @@ No special usage instructions.
 Known issues / Roadmap
 ======================
 
-* ...
+None
 
 Bug Tracker
 ===========
