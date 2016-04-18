@@ -46,10 +46,10 @@ class res_company(osv.Model):
     _columns = {
         # Re-define from openerp/addons/base/res/res_company.py to limit size
         'vat': fields.related(
-            'partner_id', 'vat', string="Tax ID", type="char", size=10),
+            'partner_id', 'vat', string="Tax Identification Number", type="char", size=10),
 
         'vat_number': fields.char(
-            'VAT', size=10, select=True, help="Tax Identification Number"),
+            'VAT', size=10, select=True, help="VAT Registration Number"),
         'ethiopic_name': fields.related(
             'partner_id', 'ethiopic_name', string='Ethiopic Name',
             size=1024, store=True, type='char'),
