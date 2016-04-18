@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="view_res_bank_form" model="ir.ui.view">
+            <field name="name">res.bank.inherit.l10n_et</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bic']" position="attributes">
+                    <attribute name="string">BIC/Swift Code</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_partner_bank_form" model="ir.ui.view">
+            <field name="name">res.partner.bank.inherit.l10n_et</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+	            <xpath expr="//field[@name='bank_bic']" position="attributes">
+	                <attribute name="string">BIC/Swift Code</attribute>
+	            </xpath>
+            </field>
+        </record>
+        
+        <record id="view_partner_form_simple" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.simple</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_simple_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="ethiopic_name" placeholder="ስም በአማርኛ" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="ethiopic_name" placeholder="ስም በአማርኛ" />
+                    </xpath>
+                    <xpath expr="/form/sheet/group" position="after">
+                        <div name="ethiopian_address" attrs="{'readonly': [('use_parent_address','=',True)]}">
+                            <group string="Ethiopian Address">
+                                <group>
+                                    <field name="subcity"/>
+                                    <label for="kebele" string="Kebele/House No"/>
+                                    <div class="address_format">
+                                        <field name="kebele" style="width: 30%%" placeholder="Kebele"/>
+                                        <field name="houseno" style="width: 33%%" placeholder="House No."/>
+                                        <field name="pobox" style="width: 34%%" placeholder="PO Box"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <label for="et_subcity" string="Amharic Subcity/City"/>
+                                    <div class="address_format">
+                                        <field name="et_subcity" style="width: 50%%" placeholder="ክ/ክተማ"/>
+                                        <field name="et_city" style="width: 48%%" placeholder="ክተማ"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </div>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+        <record id="view_company_form" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="ethiopic_name" placeholder="ስም በአማርኛ" />
+                    </xpath>
+                    <xpath expr="//field[@name='vat']" position="after">
+                    	<field name="vat_number"/>
+                    </xpath>
+                    <xpath expr="//field[@name='vat']" position="attributes">
+                    	<attribute name="string">TIN</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_registry']" position="attributes">
+                    	<attribute name="string">Registration No.</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
