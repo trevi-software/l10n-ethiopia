@@ -130,8 +130,8 @@ class res_company(osv.Model):
     _inherit = 'res.company'
 
     def write(self, cr, uid, ids, vals, context=None):
-        """When the TIN and VAT registration numbers are changed in the company,
-        change them on the partner as well"""
+        """When the TIN and VAT registration numbers are changed in the,
+        company, change them on the partner as well"""
 
         res = super(res_company, self).write(cr, uid, ids, vals,
                                              context=context)
