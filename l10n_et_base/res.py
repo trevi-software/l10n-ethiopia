@@ -46,7 +46,8 @@ class res_company(orm.Model):
     _columns = {
         # Re-define from openerp/addons/base/res/res_company.py to limit size
         'vat': fields.related(
-            'partner_id', 'vat', string="Tax Identification Number", type="char", size=10),
+            'partner_id', 'vat', string="Tax Identification Number",
+            type="char", size=10),
 
         'vat_number': fields.char(
             'VAT', size=10, select=True, help="VAT Registration Number"),
