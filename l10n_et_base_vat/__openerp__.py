@@ -24,15 +24,6 @@
     'version': '1.0',
     'category': 'Localization',
     'license': 'AGPL-3',
-    'description': """
-Base Module Localization for Ethiopia Partners VAT
-==================================================
-
-    - Rename VAT field to TIN and introduce another field: 'vat_number' for
-      VAT registration number in Partner objects
-    - Disable VAT check as it is irrelevant in Ethiopia.
-    - Do our own basic VAT checks for uniqueness and correctness
-    """,
     'author': 'Clear ICT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.clearict.com',
     'depends': [
@@ -50,5 +41,4 @@ Base Module Localization for Ethiopia Partners VAT
     'demo_xml': [
     ],
     'installable': True,
-    'active': False,
 }

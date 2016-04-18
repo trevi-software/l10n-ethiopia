@@ -7,8 +7,8 @@ l10n_et_base_vat
 ================
 
 This module extends the VAT field in the Partner object to follow
-common practice in Ethipia. The automatic VAT checks are disabled
-and a basic uniqueness, length and numeric check are done.
+common practice in Ethiopia. The automatic VAT checks are disabled
+and basic uniqueness, length and numeric check are done instead.
 
 Installation
 ============
