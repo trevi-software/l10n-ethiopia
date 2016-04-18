@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_partner_form_base_vat" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.base_vat</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base_vat.view_partner_form"/>
+            <field name="arch" type="xml">
+	            <xpath expr="//field[@name='vat']" position="replace"/>
+	            <xpath expr="//label[@for='vat']" position="attributes">
+                    <attribute name="string">VAT Registered</attribute>
+                </xpath>
+	            <xpath expr="//div[@name='vat_info']" position="after">
+	            	<field name="vat_number"/>
+	            </xpath>
+	            <xpath expr="//button[@name='button_check_vat']" position="attributes">
+	            	<attribute name="invisible">True</attribute>
+	            </xpath>
+            </field>
+        </record>
+
+        <record id="company_form_vat" model="ir.ui.view">
+            <field name="name">res.company.form.inherit.base_vat</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base_vat.company_form_vat"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='vat_check_vies']" position="attributes">
+	            	<attribute name="invisible">True</attribute>
+            	</xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <h4>
+                        <field name="vat" placeholder="Taxpayer ID Number (TIN)"/>
+                    </h4>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
