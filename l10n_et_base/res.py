@@ -20,10 +20,10 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, orm
 
 
-class res_partner(osv.Model):
+class res_partner(orm.Model):
 
     _inherit = 'res.partner'
 
@@ -39,7 +39,7 @@ class res_partner(osv.Model):
     }
 
 
-class res_company(osv.Model):
+class res_company(orm.Model):
 
     _inherit = 'res.company'
 
@@ -56,7 +56,7 @@ class res_company(osv.Model):
     }
 
 
-class res_country_state(osv.Model):
+class res_country_state(orm.Model):
 
     _inherit = 'res.country.state'
 

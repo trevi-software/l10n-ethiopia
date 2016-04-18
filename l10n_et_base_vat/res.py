@@ -20,14 +20,14 @@
 ##############################################################################
 
 from openerp import SUPERUSER_ID
-from openerp.osv import fields, osv
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 TIN_LENGTH = 10
 VAT_LENGTH = 10
 
 
-class res_partner(osv.Model):
+class res_partner(orm.Model):
 
     _inherit = 'res.partner'
 
@@ -125,7 +125,7 @@ class res_partner(osv.Model):
                      ["vat"])]
 
 
-class res_company(osv.Model):
+class res_company(orm.Model):
 
     _inherit = 'res.company'
 
