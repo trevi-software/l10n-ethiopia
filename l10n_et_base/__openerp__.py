@@ -31,13 +31,13 @@
     'depends': [
         'base',
     ],
-    'update_xml': [
+    'data': [
         'views/res_company.xml',
         'views/res_partner.xml',
     ],
     'test': [
     ],
-    'demo_xml': [
+    'demo': [
     ],
     'installable': True,
     'active': False,
