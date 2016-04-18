@@ -24,10 +24,6 @@
     'version': '1.0',
     'category': 'Localization',
     'license': 'AGPL-3',
-    'description': """
-Module for names of places in Ethiopia
-======================================
-    """,
     'author': 'Clear ICT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.clearict.com',
     'depends': [
@@ -43,5 +39,4 @@ Module for names of places in Ethiopia
     'demo_xml': [
     ],
     'installable': True,
-    'active': False,
 }
