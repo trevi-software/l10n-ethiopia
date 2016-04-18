@@ -34,12 +34,8 @@ env:
   global:
   - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
   - TRANSIFEX_USER='transbot@odoo-community.org'
-  # This line contains the encrypted transifex password
-  # To encrypt transifex password, install travis ruby utils with:
-  #   $ gem install travis --user-install
-  # and use:
-  #   $ travis encrypt TRANSIFEX_PASSWORD=your-password -r owner/project
-  - secure: Jxuo2xgLN25ZibXNSzhgyOlbZPycT9yEAzXb3A5r56FwSpLgJ2yPmswNFDtuEFQQz0++6dXSYgWeA3BWgnrjLTxFptxAI8zBfEOXuy6KdyCxbZ3Xw9N3iPDzNZJAQFWGfiNDnaCchC0EK5yXPHJEg0gHMQoCk4QpO7BzBMumit9Rt93MlgK7hvdGi0PPI5liwCdRUAjn/tTEg0BQLTKcJpbuaqFgY2dHS0xFY0a/+NQWN6RcjpLk1+NWZ6wPvCg7nluPUqafxZI+qy1lKayopz2wyGjDtSUONuUxMT7F0lLja+U/JF61a5qRo+vq5MLxWBnNICWwX6PnNW1djsf0zWNtCNNfaQT75DPE2LPrF2Kqj1TJFW1IH7KVplJ9HGRqZa54ujemQhFT6UR+OLXzeHkUA56fIE/3MRkyq0HG2GpUDreyFAiWak4r7AOF1rhguEs0+0nNSSS8CjsSptFEqyglyA6JNbskIVMGkNC0JpEzKd81F9TH8OmhL+zjxY8CnycBp+oa0gAP0F96zx2idOyEdNV8hyPwVOMuAlAWXeR3hghrX69IPcdpL/tQC9xzvnoF3SSD+S8BZOTLK+FZWkETySAxUJbYdbxwz+zMink9xE4KAym6IQZTQZSDItENh4FYVH6XvZNqSQS/L1aBRVwRQVuhy2jLGbZh8V00BCw=
+  - secure: f+WuIbZvaPpe3wTLJM8Sh7zFpL0PDlbwBWx2pVZQwrrLanXhPLM9UQJ2xQ0LlBPSRCrEREgrRKSr4Miy/G69rYzSD/MaYJQ5wSd7rinOJM2J51DxQs0GCXjkfnbFZBZ4C1CjPOin9LnRiOISrqLkQitPnc3QaJZk1AMGeKfmA+fId9hfM/LLxlPNC6Bgt5BhScOok7WoMxfF6lPaiJIKXkjCd6b6cvXgiMggrRa515hjWrXEN77gP8lOx2wYKTI9a8Q33d97odhauopa6AFFatKl6pd4mC5BSHQfvhgnpr+7iY9p6orScnsxsXqnKX6Hnb44GlGBmCdR5PDB0QfQDtIz5p6/qQZQw93UJX0SffSrsKIntWW34JCkYAv3Eq1jli35+KQIbZCo4nZezxGmD+D+p6P6SFM8r4UJ5aWXTrJT2B5EWrPFcalUTxdI7StNZM6nHjWeyXymgm9EKqsWUcvyazRLmkkXwi+eV7gWqOCeGWOBBjIMxNv7cQ9K37bE14aDaAgUPkjJnAFjlGRptneLKFV0X+SPsl5j97kLWp+t7f6JDNVLlDyJcH5vm1ktd0zdBu1ZLqeT1LPFUb4vdY/fonqWAllZK6PQwhciLOqeTRTxZuoTJicqaQgLBgyKnwL8AVq+tEBYswhg2EfJ14LV3P1GVG5UxDepcL1Eshg=
+
   # Use the following lines if you need to manually change the transifex project slug or/and the transifex organization.
   # The default project slug is owner-repo_name-version (with dash in the version string).
   # The default organization is the owner of the repo.
@@ -52,7 +48,7 @@ env:
 
   matrix:
   - LINT_CHECK="1"
-  - TRANSIFEX="0"
+  - TRANSIFEX="1"
   - TESTS="1" ODOO_REPO="odoo/odoo"
   - TESTS="1" ODOO_REPO="OCA/OCB"
 # either use the two lines above or the two below. Don't change the default if
