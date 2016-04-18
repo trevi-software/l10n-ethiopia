@@ -21,6 +21,8 @@
 ##############################################################################
 
 # flake8: noqa
+
+# loading res_partner after res_company doesn't work
+from . import res_partner
 from . import res_company
 from . import res_country
-from . import res_partner
