@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (C) 2012,2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
@@ -23,6 +23,7 @@
     'name': 'Ethiopia - States and Provinces',
     'version': '1.0',
     'category': 'Localization',
+    'license': 'AGPL-3',
     'description': """
 Module for names of places in Ethiopia
 ======================================

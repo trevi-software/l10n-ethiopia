@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (C) 2015 Clear ICT Solutions <info@clearict.com>.
@@ -23,6 +23,7 @@
     'name': 'Ethiopia - Base VAT',
     'version': '1.0',
     'category': 'Localization',
+    'license': 'AGPL-3',
     'description': """
 Base Module Localization for Ethiopia Partners VAT
 ==================================================
