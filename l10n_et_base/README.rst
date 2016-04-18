@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 ==============
-{module_title}
+l10n_et_base
 ==============
 
 This module extends the functionality of base models to support Ethiopia
