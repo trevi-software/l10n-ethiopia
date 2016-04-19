@@ -8,6 +8,12 @@
 Ethiopian modules for Odoo.
 
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[l10n_et_base](l10n_et_base/) | 8.0.1.0.0 | Base module localization for Ethiopia
+
 [//]: # (end addons)
 
 Translation Status
