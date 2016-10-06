@@ -39,6 +39,6 @@
     ],
     'demo': [
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
