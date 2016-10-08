@@ -25,7 +25,7 @@
     'summary': 'Base module localization for Ethiopia',
     'author': 'Clear ICT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.clearict.com',
-    'version': '9.0.8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'category': 'Localization',
     'license': 'AGPL-3',
     'depends': [
