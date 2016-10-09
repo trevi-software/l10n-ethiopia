@@ -21,7 +21,7 @@
 {
     'name': 'Ethiopia localization - Titles',
     'summary': 'Commonly used titles in Ethiopia',
-    'version': '8.0.0.1',
+    'version': '8.0.0.1.0',
     'category': 'Localization',
     'description': """
 Features:
