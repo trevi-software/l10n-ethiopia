@@ -14,6 +14,7 @@ addon | version | summary
 --- | --- | ---
 [l10n_et_base](l10n_et_base/) | 8.0.1.0.0 | Base module localization for Ethiopia
 [l10n_et_base_vat](l10n_et_base_vat/) | 8.0.1.0.0 | Ethiopia - Base VAT
+[l10n_et_title](l10n_et_title/) | 8.0.0.1 | Commonly used titles in Ethiopia
 [l10n_et_toponym](l10n_et_toponym/) | 8.0.1.0.0 | Ethiopia - States and Provinces
 
 [//]: # (end addons)
