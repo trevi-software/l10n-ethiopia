@@ -12,7 +12,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[l10n_et_base](l10n_et_base/) | 9.0.8.0.1.0.0 | Base module localization for Ethiopia
+[l10n_et_base](l10n_et_base/) | 9.0.1.0.0 | Base module localization for Ethiopia
 
 [//]: # (end addons)
 
