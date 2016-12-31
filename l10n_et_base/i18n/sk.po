@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-ethiopia (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 02:18+0000\n"
-"PO-Revision-Date: 2016-12-22 21:03+0000\n"
+"POT-Creation-Date: 2016-12-24 02:30+0000\n"
+"PO-Revision-Date: 2016-12-27 08:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-l10n-ethiopia-8-0/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr ""
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Spoločnosti"
 
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_country_state

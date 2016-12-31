@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: l10n-ethiopia (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 15:24+0000\n"
-"PO-Revision-Date: 2016-11-13 12:25+0000\n"
+"POT-Creation-Date: 2016-12-24 02:30+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-l10n-ethiopia-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr ""
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Yritykset"
 
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_country_state
