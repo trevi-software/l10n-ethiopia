@@ -8,6 +8,7 @@
 Ethiopian modules for Odoo.
 
 [//]: # (addons)
+
 Unported addons
 ---------------
 addon | version | summary
