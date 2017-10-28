@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: l10n-ethiopia (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-01 04:07+0000\n"
-"PO-Revision-Date: 2017-10-23 10:52+0000\n"
+"PO-Revision-Date: 2017-09-22 22:40+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-l10n-ethiopia-8-0/language/sl/)\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-l10n-ethiopia-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_et_base
 #: field:res.partner,et_city:0
@@ -41,12 +41,12 @@ msgstr ""
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_company
 msgid "Companies"
-msgstr "Družbe"
+msgstr "Bedrijven"
 
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_country_state
 msgid "Country state"
-msgstr "Zvezna država"
+msgstr "Provincie"
 
 #. module: l10n_et_base
 #: view:res.partner:l10n_et_base.view_partner_form
@@ -97,7 +97,7 @@ msgstr ""
 #. module: l10n_et_base
 #: model:ir.model,name:l10n_et_base.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: l10n_et_base
 #: view:res.company:l10n_et_base.view_company_form
