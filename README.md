@@ -8,7 +8,15 @@
 Ethiopian modules for Odoo.
 
 [//]: # (addons)
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[l10n_et_base](l10n_et_base/) | 1.0 | Ethiopia - Base
+[l10n_et_base_vat](l10n_et_base_vat/) | 1.0 | Ethiopia - Base VAT
+[l10n_et_toponym](l10n_et_toponym/) | 1.0 | Ethiopia - States and Provinces
+
 [//]: # (end addons)
 
 Translation Status
