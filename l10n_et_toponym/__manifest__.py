@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2012,2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
+#    Copyright (C) 2012,2013,2019 Michael Telahun Makonnen <miket@clearict.com>.
 #    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify it
@@ -21,22 +21,16 @@
 
 {
     'name': 'Ethiopia - States and Provinces',
-    'version': '8.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Localization',
     'license': 'AGPL-3',
     'author': 'Clear ICT Solutions, Odoo Community Association (OCA)',
-    'website': 'http://www.clearict.com',
+    'website': 'https://github.com/OCA/l10n-ethiopia/',
     'depends': [
         'base',
     ],
-    'init_xml': [
+    'data': [
         'data/res.country.state.csv',
-    ],
-    'update_xml': [
-    ],
-    'test': [
-    ],
-    'demo_xml': [
     ],
     'installable': True,
 }
