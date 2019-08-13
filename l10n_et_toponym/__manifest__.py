@@ -33,4 +33,5 @@
         'data/res.country.state.csv',
     ],
     'installable': True,
+    'development_status': 'alpha',
 }
