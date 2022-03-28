@@ -19,7 +19,7 @@ Ethiopia - Timezone
 
 |badge1| |badge2| |badge3| 
 
-This module makes the timezone of Ethiopia the default timezone for users.
+This module makes the timezone of Ethiopia the default timezone for users and partners.
 
 **Table of contents**
 
