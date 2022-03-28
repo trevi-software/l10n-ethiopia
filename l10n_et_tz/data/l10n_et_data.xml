@@ -6,6 +6,9 @@
         <record id="base.user_root" model="res.users">
             <field name="tz">Africa/Addis_Ababa</field>
         </record>
+        <record id="base.user_admin" model="res.users">
+            <field name="tz">Africa/Addis_Ababa</field>
+        </record>
 
     </data>
 </odoo>
