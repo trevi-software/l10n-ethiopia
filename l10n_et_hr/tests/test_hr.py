@@ -33,7 +33,7 @@ class RecruitmentTestCase(TransactionCase):
     def test_name_get(self):
 
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_name"
+            "l10n_et_hr.use_ethiopic_employee_name"
         )
         self.assertEqual(
             use_ethiopic_name, False, "By default the ethiopic name knob is OFF"
@@ -47,10 +47,12 @@ class RecruitmentTestCase(TransactionCase):
 
     def test_name_get_ethiopic(self):
 
-        self.env["ir.config_parameter"].set_param("l10n_et_hr.use_ethiopic_name", True)
+        self.env["ir.config_parameter"].set_param(
+            "l10n_et_hr.use_ethiopic_employee_name", True
+        )
 
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_name"
+            "l10n_et_hr.use_ethiopic_employee_name"
         )
         self.assertTrue(use_ethiopic_name, "I turned the ethiopic name knob ON")
 
@@ -139,4 +141,21 @@ class RecruitmentTestCase(TransactionCase):
             self.job.display_name,
             "ቦዘኔ",
             "The content of 'ethiopic_name' field is displayed",
+        )
+
+    def test_employee_name_get(self):
+
+        self.assertEqual(
+            self.ee.name_get()[0][1],
+            "Mike",
+            "The name_get() method is working as expected",
+        )
+
+        self.env["ir.config_parameter"].set_param(
+            "l10n_et_hr.use_ethiopic_employee_name", True
+        )
+        self.assertEqual(
+            self.ee.name_get()[0][1],
+            "ሚኪ",
+            "The name_get() method is working as expected",
         )

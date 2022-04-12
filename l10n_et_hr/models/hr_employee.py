@@ -48,7 +48,7 @@ class HrEmployee(models.Model):
             ("bachelor",),
             ("master",),
             ("doctor",),
-            ("other", )
+            ("other",),
         ],
     )
     ethiopic_name = fields.Char()
@@ -62,20 +62,6 @@ class HrEmployee(models.Model):
     etcal_dob_year = fields.Selection(
         _get_year, "Year", groups="hr.group_hr_user", tracking=True
     )
-
-    def name_get(self):
-
-        res = []
-        use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_name"
-        )
-        for rec in self:
-            name = rec.name
-            if use_ethiopic_name:
-                name = rec.ethiopic_name
-            res.append((rec.id, "%s" % (name)))
-
-        return res
 
     @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
     def onchange_etdob(self):
