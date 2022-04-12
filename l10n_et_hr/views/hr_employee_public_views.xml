@@ -46,7 +46,6 @@
         <record id="hr_employee_public_view_kanban" model="ir.ui.view">
             <field name="name">hr.employee.kanban.l10n_et_hr</field>
             <field name="model">hr.employee.public</field>
-            <field name="priority">10</field>
             <field name="inherit_id" ref="hr.hr_employee_public_view_kanban" />
             <field name="priority">99</field>
             <field name="arch" type="xml">
