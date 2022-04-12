@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, models
+from odoo import _
 
 from .pycalcal import pycalcal as pcc
 
@@ -157,9 +157,7 @@ def date_gregorian_from_ethiopic(et_date):
     """Returns the gregorian date of an ethiopic_date object as
     a datetime.date object"""
 
-    return date_gregorian_from_ethiopic_base(
-        et_date[0], et_date[1], et_date[2]
-    )
+    return date_gregorian_from_ethiopic_base(et_date[0], et_date[1], et_date[2])
 
 
 def ethiopic_from_gregorian_date(d):
