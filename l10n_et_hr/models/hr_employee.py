@@ -39,6 +39,18 @@ class HrEmployee(models.Model):
 
         return res
 
+    certificate = fields.Selection(
+        selection_add=[
+            ("none", "No Formal Education"),
+            ("primary", "Primary School"),
+            ("graduate", "Secondary School"),
+            ("diploma", "Diploma"),
+            ("bachelor",),
+            ("master",),
+            ("doctor",),
+            ("other", )
+        ],
+    )
     ethiopic_name = fields.Char()
     use_ethiopic_dob = fields.Boolean("Use Ethiopic Birthday")
     etcal_dob_month = fields.Selection(
