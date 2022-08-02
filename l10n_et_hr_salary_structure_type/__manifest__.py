@@ -2,9 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Human Resources - Ethiopia",
-    "summary": "Ethiopian localization of Employee Contract Types",
-    "version": "14.0.1.0.0",
+    "name": "Salary Structure Types - Ethiopia",
+    "summary": "Ethiopian localization of Employee Salary Structure Types",
+    "version": "14.0.1.2.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
