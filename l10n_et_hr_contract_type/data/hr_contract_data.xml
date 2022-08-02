@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="et_permanent" model="hr.contract.type">
+            <field name="name">Permanent Staff</field>
+        </record>
+        <record id="et_contract" model="hr.contract.type">
+            <field name="name">Contract Staff</field>
+        </record>
+        <record id="et_part" model="hr.contract.type">
+            <field name="name">Part-time Staff</field>
+        </record>
+        <record id="et_casual" model="hr.contract.type">
+            <field name="name">Casual Labour</field>
+        </record>
+        <record id="et_expath" model="hr.contract.type">
+            <field name="name">Expatriate Staff</field>
+        </record>
+    </data>
+
+</odoo>
