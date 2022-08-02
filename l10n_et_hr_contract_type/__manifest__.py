@@ -15,6 +15,7 @@
     ],
     "data": [
         "data/hr_contract_data.xml",
+        "views/hr_contract_type_view.xml",
     ],
     "installable": True,
 }
