@@ -3,19 +3,19 @@
 
     <data noupdate="1">
         <record id="et_permanent" model="hr.contract.type">
-            <field name="name">Permanent Staff</field>
+            <field name="name">Permanent</field>
         </record>
         <record id="et_contract" model="hr.contract.type">
-            <field name="name">Contract Staff</field>
+            <field name="name">Contract</field>
         </record>
         <record id="et_part" model="hr.contract.type">
-            <field name="name">Part-time Staff</field>
+            <field name="name">Part-time</field>
         </record>
         <record id="et_casual" model="hr.contract.type">
             <field name="name">Casual Labour</field>
         </record>
         <record id="et_expath" model="hr.contract.type">
-            <field name="name">Expatriate Staff</field>
+            <field name="name">Expatriate</field>
         </record>
     </data>
 
