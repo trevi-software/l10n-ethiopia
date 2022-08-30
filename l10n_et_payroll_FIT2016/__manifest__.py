@@ -13,7 +13,7 @@
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
         "payroll",
-        "l10n_et_payroll_category",
+        "payroll_default_salary_rules",
     ],
     "data": [
         "data/payroll_data.xml",
