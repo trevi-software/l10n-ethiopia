@@ -13,8 +13,10 @@ class HrDepartment(models.Model):
     def name_get(self):
 
         res = []
-        use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_department_name"
+        use_ethiopic_name = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("l10n_et_hr.use_ethiopic_department_name")
         )
         if use_ethiopic_name and not self.env.context.get("hierarchical_naming", True):
             for rec in self:
@@ -29,8 +31,10 @@ class HrDepartment(models.Model):
     @api.depends("name", "ethiopic_name", "parent_id.complete_name")
     def _compute_complete_name(self):
 
-        use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_department_name"
+        use_ethiopic_name = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("l10n_et_hr.use_ethiopic_department_name")
         )
         if use_ethiopic_name:
             for department in self:

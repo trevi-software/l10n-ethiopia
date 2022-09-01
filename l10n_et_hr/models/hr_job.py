@@ -13,8 +13,10 @@ class HrJob(models.Model):
     def name_get(self):
 
         res = []
-        use_ethiopic_name = self.env["ir.config_parameter"].get_param(
-            "l10n_et_hr.use_ethiopic_job_name"
+        use_ethiopic_name = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("l10n_et_hr.use_ethiopic_job_name")
         )
         if use_ethiopic_name:
             for rec in self:
