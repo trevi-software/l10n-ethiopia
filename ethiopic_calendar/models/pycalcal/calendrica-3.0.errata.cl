@@ -77,7 +77,7 @@
 ;; for robustness, replaced -272 with -273 + gregorian-epoch
 (defun alt-orthodox-easter (g-year)
   ;; TYPE gregorian-year -> fixed-date
-  ;; Alternative calculation of fixed date of Orthodox Easter 
+  ;; Alternative calculation of fixed date of Orthodox Easter
   ;; in Gregorian year $g-year$.
   (let* ((paschal-moon  ; Day after full moon on
                         ; or after March 21.
@@ -406,7 +406,7 @@
          (year (standard-year h-date))
          (year1 (if (>= month tishri) (1- year) year))
          (start (fixed-from-hebrew
-                 (hebrew-date year1 nisan 1))) 
+                 (hebrew-date year1 nisan 1)))
          (g-year (gregorian-year-from-fixed
                   (+ start 60)))
          (new-year (observational-hebrew-new-year g-year))
@@ -428,7 +428,7 @@
          (g-year (gregorian-year-from-fixed date-prime))
          (ny (observational-hebrew-new-year g-year))
          (new-year (if (< date-prime ny)
-                       (observational-hebrew-new-year 
+                       (observational-hebrew-new-year
                         (1- g-year))
                      ny))
          (month (1+ (round (/ (- moon new-year) 29.5))))
@@ -442,7 +442,7 @@
 (defun refraction (tee location)
   ;; TYPE (moment location) -> angle
   ;; Angle correction due to refraction calculated at time $tee$ and $location$.
-  ;; The time parameter $tee$ is not being used here, but could be used in a more 
+  ;; The time parameter $tee$ is not being used here, but could be used in a more
   ;; refined calculation that takes average atmospheric conditions into account.
   (let* ((h (max (mt 0) (elevation location)))
          (cap-R (mt 6.372d6)) ; Radius of Earth.
