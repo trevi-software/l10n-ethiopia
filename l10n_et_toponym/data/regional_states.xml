@@ -62,8 +62,18 @@
         </record>
         <record id="state_et_13" model="res.country.state">
             <field name="country_id" ref="base.et" />
+            <field name="code">SE</field>
+            <field name="name">South Ethiopia Peoples</field>
+        </record>
+        <record id="state_et_14" model="res.country.state">
+            <field name="country_id" ref="base.et" />
             <field name="code">SW</field>
             <field name="name">South West Ethiopia Peoples</field>
+        </record>
+        <record id="state_et_15" model="res.country.state">
+            <field name="country_id" ref="base.et" />
+            <field name="code">CE</field>
+            <field name="name">Central Ethiopia Peoples</field>
         </record>
     </data>
 </odoo>
