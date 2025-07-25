@@ -16,7 +16,7 @@ beginfig(0);
   draw_ecliptic(1,1);
   draw_lunar_orbit(1,1);
   draw_meridian(0,1,1);
-  
+
   z0=(0,0); % origin
   z1=project((r,0,0),V1,V2); % x-axis
   z2=project((0,r,0),V1,V2); % y-axis
