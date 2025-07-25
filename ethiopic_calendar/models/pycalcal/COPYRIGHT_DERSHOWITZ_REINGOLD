@@ -1,5 +1,5 @@
 # ================================================================
-# 
+#
 # The Functions (code, comments, and definitions) contained in this
 # file (the "Program") were written by Edward M. Reingold and Nachum
 # Dershowitz (the "Authors"), who retain all rights to them except as
@@ -24,7 +24,7 @@
 #
 # 1. LICENSE.  The Authors grant you a license for personal use.
 # This means that for strictly personal use you may copy and use the
-# code, and keep a backup or archival copy also.  The Authors grant you a 
+# code, and keep a backup or archival copy also.  The Authors grant you a
 # license for re-use within non-commercial, non-profit softeare provided prominent
 # credit is given and the Authors' rights are preserved.  Any other uses,
 # including without limitation, allowing the code or its output to be
