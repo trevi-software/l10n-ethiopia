@@ -16,7 +16,17 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[ethiopic_calendar](ethiopic_calendar/) | 14.0.1.0.0 |  | Date calculations in the Ethiopian calendar
+[l10n_et_hr](l10n_et_hr/) | 14.0.1.0.0 |  | Ethiopian localization of basic HR records
+[l10n_et_hr_employee_wizard](l10n_et_hr_employee_wizard/) | 14.0.1.0.0 |  | Ethiopian localization of new employee wizard
+[l10n_et_payroll_FIT2016](l10n_et_payroll_FIT2016/) | 14.0.1.0.0 |  | Ethiopian Federal Income Tax tables (rev. 2008)
+[l10n_et_payroll_FIT2025](l10n_et_payroll_FIT2025/) | 14.0.1.0.0 |  | Ethiopian Federal Income Tax tables (rev. 2017)
+[l10n_et_payroll_category](l10n_et_payroll_category/) | 14.0.1.0.0 |  | Additional payroll categories for Ethiopia
+[l10n_et_tz](l10n_et_tz/) | 14.0.1.0.0 |  | Set default timezone to Africa/Addis_Ababa
 
 [//]: # (end addons)
 
