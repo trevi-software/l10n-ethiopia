@@ -8,8 +8,6 @@ from odoo import fields, models
 class hr_holidays_status(models.Model):
     
     _inherit = 'hr.leave.type'
-    
-    ethiopic_name = fields.Char()
 
     def get_remaining_days_by_employee(self, employee_id):
         employee_ids = [employee_id]
