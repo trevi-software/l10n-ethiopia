@@ -7,7 +7,7 @@
     "category": "Finance",
     "author": "TREVI Software, Michael Telahun Makonnen",
     "license": "AGPL-3",
-    "website": "https://github.com/OCA/l10n-ethiopia",
+    "website": "https://github.com/trevi-software/trevi-hr",
     "images": ["static/src/img/main_screenshot.png"],
     "version": "14.0.1.0.0",
     "depends": [
