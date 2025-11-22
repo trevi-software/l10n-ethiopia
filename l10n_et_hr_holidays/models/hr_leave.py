@@ -2,7 +2,7 @@ from odoo import api, models
 
 
 class HrLeave(models.Model):
-    _inherit = 'hr.leave'
+    _inherit = "hr.leave"
 
     def _get_number_of_days(self, date_from, date_to, employee_id):
         if self.holiday_status_id.exclude_rest_days or not self.holiday_status_id:
@@ -23,8 +23,7 @@ class HrLeave(models.Model):
         For such cases, we need to serialize the call to super in fragments.
         """
         to_serialize = self.filtered(
-            lambda x: x.state == "validate"
-            and x.holiday_status_id.exclude_rest_days
+            lambda x: x.state == "validate" and x.holiday_status_id.exclude_rest_days
         )
         for leave in to_serialize:
             leave = leave.with_context(

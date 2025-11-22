@@ -5,10 +5,10 @@
 from odoo import fields, models
 
 
-class hr_holidays_status(models.Model):
-    
-    _inherit = 'hr.leave.type'
-    
+class HrLeaveType(models.Model):
+
+    _inherit = "hr.leave.type"
+
     ethiopic_name = fields.Char()
 
     def get_remaining_days_by_employee(self, employee_id):
@@ -16,13 +16,15 @@ class hr_holidays_status(models.Model):
         res = {
             employee_id: {
                 leave_type.id: {
-                    'max_leaves': 0,
-                    'leaves_taken': 0,
-                    'remaining_leaves': 0,
-                    'virtual_remaining_leaves': 0,
-                    'virtual_leaves_taken': 0,
-                } for leave_type in self
-            } for employee_id in employee_ids
+                    "max_leaves": 0,
+                    "leaves_taken": 0,
+                    "remaining_leaves": 0,
+                    "virtual_remaining_leaves": 0,
+                    "virtual_leaves_taken": 0,
+                }
+                for leave_type in self
+            }
+            for employee_id in employee_ids
         }
 
         if employee_id:

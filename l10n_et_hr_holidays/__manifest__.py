@@ -9,7 +9,7 @@
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software",
-    "website": "https://github.com/OCA/l10n-ethiopia",
+    "website": "https://github.com/trevi-software/trevi-hr",
     "depends": [
         "hr_holidays_public",
     ],
