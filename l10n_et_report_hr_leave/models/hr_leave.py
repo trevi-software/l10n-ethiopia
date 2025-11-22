@@ -13,8 +13,39 @@ from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
 class HolidaysRequest(models.Model):
     
     _inherit = 'hr.leave'
-
+    
     return_date_et = fields.Char('Ethiopic Return Date')
+
+    rest_days = fields.Float(
+        'Rest (Days)', compute='_compute_rest_days', store=True, readonly=False,
+        copy=False, tracking=True, help='Number of rest days of the time off request')
+
+    public_holiday_days = fields.Float(
+        'Public Holiday (Days)', compute='_compute_public_holiday_days', store=True,
+        readonly=False, copy=False, tracking=True,
+        help='Number of public holidays in the time off request')
+
+    real_days = fields.Float(
+        'Real (Days)', compute='_compute_real_days', store=True, readonly=False,
+        copy=False, tracking=True,
+        help="Number of actual days, including holidays and days off, "
+             "in the time off request")
+
+    def _compute_rest_days(self):
+        for record in self:
+            record.rest_days = 0
+
+    def _compute_public_holiday_days(self):
+        for record in self:
+            public_holidays = self.env["hr.holidays.public.line"].search([
+                        ("date", ">=", record.date_from),
+                        ("date", "<", record.date_to),
+            ])
+            record.public_holiday_days = len(public_holidays)
+
+    def _compute_real_days(self):
+        for record in self:
+            record.real_days = record.number_of_days + record.rest_days + record.public_holiday_days
 
     @api.model
     def time2ethiopic(self, year, month, day):
