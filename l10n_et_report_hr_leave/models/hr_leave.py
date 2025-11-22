@@ -81,7 +81,7 @@ class HrLeave(models.Model):
 
         return (
             ""
-            + ET_MONTHS_SELECTION_AM[pcc_date[1] - 1]
+            + ET_MONTHS_SELECTION_AM[pcc_date[1] - 1][1]
             + " "
             + str(pcc_date[2])
             + ", "
@@ -89,27 +89,16 @@ class HrLeave(models.Model):
         )
 
     @api.onchange("date_to")
-    def onchange_enddate(
-        self, employee_id, date_from, date_to, holiday_status_id, no_days, context=None
-    ):
+    def onchange_enddate(self):
 
-        res = super(HrLeave, self).onchange_enddate(
-            employee_id, date_from, date_to, holiday_status_id, no_days, context=context
-        )
-        if res.get("value", False) and res["value"].get("return_date"):
-            dt = datetime.strptime(res["value"]["return_date"], "%B %d, %Y")
-            res["value"].update(
-                {
-                    "return_date_et": self.time2ethiopic(
+        for record in self:
+            dt = record.date_to
+            if record.date_to:
+                record.return_date_et = record.time2ethiopic(
                         int(dt.strftime("%Y")),
                         int(dt.strftime("%m")),
                         int(dt.strftime("%d")),
                     )
-                }
-            )
-        elif res.get("value", False):
-            res["value"].update({"return_date_et": False})
-        return res
 
     @api.model
     def format_date(self, date_str):
