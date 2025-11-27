@@ -39,6 +39,7 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//sheet/group/group/div/div[@class='o_row o_row_readonly o_hr_holidays_dates']" position="after">
+                    <label for="return_date_et" string="Return Date (Ethiopic)" />
                     <div>
                         <field
                             name="return_date_et"
@@ -48,6 +49,24 @@
                                 'required': ['|', ('date_from', '=', False), ('date_to', '=', False)]
                             }"
                         />
+                    </div>
+                </xpath>
+                <xpath expr="//sheet/group/group/div/div[@class='o_row']" position="after">
+                    <div>
+                        <div class="o_row">
+                            <label for="rest_days" string="Rest" />
+                            <div>
+                                <field name="rest_days"/>
+                            </div>
+                            <label for="public_holiday_days" string="Holidays" />
+                            <div>
+                                <field name="public_holiday_days"/>
+                            </div>
+                            <label for="real_days" string="Real" />
+                            <div>
+                                <field name="real_days" readonly="1" />
+                            </div>
+                        </div>
                     </div>
                 </xpath>
             </data>

@@ -65,6 +65,7 @@ class HrLeave(models.Model):
             )
             record.public_holiday_days = len(public_holidays)
 
+    @api.depends("number_of_days", "rest_days", "public_holiday_days")
     def _compute_real_days(self):
         for record in self:
             record.real_days = (
