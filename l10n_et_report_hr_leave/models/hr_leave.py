@@ -2,6 +2,7 @@
 # Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+import logging
 from datetime import datetime
 
 from odoo import api, fields, models
@@ -14,6 +15,7 @@ from odoo.addons.ethiopic_calendar.models.ethiopic_calendar import (
 from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
 
 
+_logger = logging.getLogger(__name__)
 class HrLeave(models.Model):
 
     _inherit = "hr.leave"
@@ -51,6 +53,20 @@ class HrLeave(models.Model):
         "in the time off request",
     )
 
+    available_leave_days = fields.Float(
+        "Available Leave Days",
+        compute="_compute_available_leave_days",
+        readonly=True,
+        tracking=False,
+        help="Number of available leave days for the employee",)
+
+    taken_leave_days = fields.Float(
+        "Taken Leave Days",
+        compute="_compute_taken_leave_days",
+        readonly=True,
+        tracking=False,
+        help="Number of available leave days for the employee",)
+
     def _compute_rest_days(self):
         for record in self:
             record.rest_days = 0
@@ -70,6 +86,32 @@ class HrLeave(models.Model):
         for record in self:
             record.real_days = (
                 record.number_of_days + record.rest_days + record.public_holiday_days
+            )
+
+    @api.depends("number_of_days")
+    def _compute_taken_leave_days(self):
+        leaves = self.env["hr.leave"]
+        for record in self:
+            taken_leaves = leaves.search([
+                ("employee_id", "=", record.employee_id.id),
+                ("holiday_status_id", "=", record.holiday_status_id.id),
+                ("state", "=", "validate"),
+            ])
+            _logger.error("%s leaves for %s: %s", record.name, record.employee_id.name, taken_leaves)
+            record.taken_leave_days = sum(taken_leaves.mapped("number_of_days"))
+
+    @api.depends("number_of_days", "taken_leave_days")
+    def _compute_available_leave_days(self):
+        allocation = self.env["hr.leave.allocation"]
+        for record in self:
+            my_allocations = allocation.search([
+                ("employee_id", "=", record.employee_id.id),
+                ("holiday_status_id", "=", record.holiday_status_id.id),
+                ("state", "=", "validate"),
+            ])
+            _logger.error("%s allocated leaves for %s: %s", record.name, record.employee_id.name, my_allocations)
+            record.available_leave_days = (
+                sum(my_allocations.mapped("number_of_days")) - record.taken_leave_days
             )
 
     @api.model
