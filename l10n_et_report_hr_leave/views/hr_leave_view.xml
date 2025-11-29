@@ -39,7 +39,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='holiday_status_id']" position="after">
                 <field name="available_leave_days" />
-                <field name="taken_leave_days" />
             </xpath>
         </field>
     </record>
