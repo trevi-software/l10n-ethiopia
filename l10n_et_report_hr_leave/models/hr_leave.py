@@ -97,7 +97,6 @@ class HrLeave(models.Model):
                 ("holiday_status_id", "=", record.holiday_status_id.id),
                 ("state", "=", "validate"),
             ])
-            _logger.error("%s leaves for %s: %s", record.name, record.employee_id.name, taken_leaves)
             record.taken_leave_days = sum(taken_leaves.mapped("number_of_days"))
 
     @api.depends("number_of_days", "taken_leave_days")
@@ -109,7 +108,6 @@ class HrLeave(models.Model):
                 ("holiday_status_id", "=", record.holiday_status_id.id),
                 ("state", "=", "validate"),
             ])
-            _logger.error("%s allocated leaves for %s: %s", record.name, record.employee_id.name, my_allocations)
             record.available_leave_days = (
                 sum(my_allocations.mapped("number_of_days")) - record.taken_leave_days
             )
