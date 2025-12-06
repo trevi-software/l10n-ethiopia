@@ -4,6 +4,7 @@
 
 import logging
 from datetime import datetime
+from pytz import timezone, UTC
 
 from odoo import api, fields, models
 from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT as OE_DTFORMAT
@@ -21,6 +22,10 @@ class HrLeave(models.Model):
     _inherit = "hr.leave"
 
     return_date_et = fields.Char("Ethiopic Return Date")
+
+    local_date_from = fields.Datetime("Local Date From", compute="_localize_date_from_to")
+
+    local_date_to = fields.Datetime("Local Date To", compute="_localize_date_from_to")
 
     rest_days = fields.Float(
         "Rest (Days)",
@@ -221,3 +226,27 @@ class HrLeave(models.Model):
             )
 
         return hrm_data
+
+    @api.depends('date_from', 'date_to')
+    def _localize_date_from_to(self):
+
+        for record in self:
+            if record.date_from:
+                record.local_date_from = UTC \
+                                            .localize(record.date_from) \
+                                            .astimezone(timezone(
+                                                record.employee_id.tz or 'UTC'
+                                            )) \
+                                            .replace(tzinfo=None)
+                
+            else:
+                record.local_date_from = False
+            if record.date_to:
+                record.local_date_to = UTC \
+                                            .localize(record.date_to) \
+                                            .astimezone(timezone(
+                                                record.employee_id.tz or 'UTC'
+                                            )) \
+                                            .replace(tzinfo=None)
+            else:
+                record.local_date_to = False
