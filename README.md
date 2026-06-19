@@ -9,7 +9,7 @@
 
 # l10n-ethiopia
 
-TODO: add repo description.
+Odoo addons for Ethiopia localization.
 
 <!-- /!\ do not modify below this line -->
 
