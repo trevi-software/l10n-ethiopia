@@ -10,7 +10,7 @@
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software",
-    "website": "https://github.com/trevi-software/trevi-hr",
+    "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
         "payroll",
         "l10n_et_payroll_category",
