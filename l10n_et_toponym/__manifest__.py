@@ -6,7 +6,7 @@
     "version": "15.0.1.0.0",
     "author": "TREVI Software, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "website": "https://github.com/trevi-software/trevi-hr",
+    "website": "https://github.com/OCA/l10n-ethiopia",
     "category": "Localization",
     "depends": [
         "base",
