@@ -4,7 +4,8 @@
 
 import logging
 from datetime import datetime
-from pytz import timezone, UTC
+
+from pytz import UTC, timezone
 
 from odoo import api, fields, models
 from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT as OE_DTFORMAT
@@ -14,7 +15,6 @@ from odoo.addons.ethiopic_calendar.models.ethiopic_calendar import (
     ET_MONTHS_SELECTION_AM,
 )
 from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
-
 
 _logger = logging.getLogger(__name__)
 class HrLeave(models.Model):
@@ -238,7 +238,7 @@ class HrLeave(models.Model):
                                                 record.employee_id.tz or 'UTC'
                                             )) \
                                             .replace(tzinfo=None)
-                
+
             else:
                 record.local_date_from = False
             if record.date_to:
