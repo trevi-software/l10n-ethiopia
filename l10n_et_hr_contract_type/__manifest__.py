@@ -11,7 +11,7 @@
     "author": "TREVI Software",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
-        "hr_contract_type",
+        "hr",
     ],
     "data": [
         "data/hr_contract_data.xml",
