@@ -11,7 +11,7 @@ class HrLeaveType(models.Model):
 
     ethiopic_name = fields.Char()
 
-    def get_remaining_days_by_employee(self, employee_id):
+    def _get_remaining_leaves(self, employee_id):
         employee_ids = [employee_id]
         res = {
             employee_id: {
