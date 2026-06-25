@@ -4,7 +4,7 @@
 {
     "name": "Salary Structure Types - Ethiopia",
     "summary": "Ethiopian localization of Employee Salary Structure Types",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
