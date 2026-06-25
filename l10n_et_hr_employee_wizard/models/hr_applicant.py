@@ -51,10 +51,10 @@ class HrApplicant(models.Model):
             ("primary", "Primary School"),
             ("graduate", "Secondary School"),
             ("diploma", "Diploma"),
-            ("bachelor", None),
-            ("master", None),
-            ("doctor", None),
-            ("other", None),
+            ("bachelor", "Batchelor (BA)"),
+            ("master", "Master (MA)"),
+            ("doctor", "Doctorate"),
+            ("other", "Other"),
         ],
     )
 
