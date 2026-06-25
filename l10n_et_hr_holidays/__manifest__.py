@@ -4,14 +4,14 @@
 {
     "name": "Leaves and Leave Types for Ethiopia",
     "summary": "Employeee Time Off Customization for Ethiopia",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
-	"hr_holidays",
+        "hr_holidays",
         "hr_holidays_public",
     ],
     "data": [
