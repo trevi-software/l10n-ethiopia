@@ -166,8 +166,8 @@ class HrLeave(models.Model):
     def get_remaining_leaves(self, leave):
 
         obj = self.env["hr.leave.type"]
-        res = obj.get_remaining_days_by_employee(
-            [leave.holiday_status_id.id], leave.employee_id.id
+        res = obj._get_remaining_leaves(
+            leave.employee_id.id
         )
         res = res[leave.employee_id.id]
         if (
@@ -189,8 +189,8 @@ class HrLeave(models.Model):
     def get_taken_leaves(self, leave):
 
         obj = self.env["hr.leave.type"]
-        res = obj.get_remaining_days_by_employee(
-            [leave.holiday_status_id.id], leave.employee_id.id
+        res = obj._get_remaining_leaves(
+            leave.employee_id.id
         )
         res = res[leave.employee_id.id]
         if (
@@ -214,8 +214,7 @@ class HrLeave(models.Model):
     def get_hrm(self):
 
         hrm_data = ("", "", _("HR Manager"), "የሠው ሃይል አስተዳደር")
-        hrm_dict = self.env["hr.config.settings"].get_default_hr_manager_id(False)
-        hrm_id = hrm_dict["hr_manager_id"]
+        hrm_id = self.env["ir.config_parameter"].sudo().get_param("hr.hr_manager_id")
         if hrm_id:
             hrm = self.env["hr.employee"].browse(hrm_id)
             hrm_data = (
