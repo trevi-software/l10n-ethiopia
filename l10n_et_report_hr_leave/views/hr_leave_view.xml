@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <data>
                 <xpath
-                    expr="//div[@class='oe_title']/h1/field[@name='name']"
+                    expr="//div[hasclass('oe_title')]/h1/field[@name='name']"
                     position="after"
                 >
                     <h1>
