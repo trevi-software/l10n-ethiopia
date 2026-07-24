@@ -18,7 +18,10 @@
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <xpath expr="/form/sheet/div/div[hasclass('oe_title')]/h1/field[@name='name']" position="after">
+            <xpath
+                expr="/form/sheet/div/div[hasclass('oe_title')]/h1/field[@name='name']"
+                position="after"
+            >
                 <field name="ethiopic_name" placeholder="ሥም በአማርኛ ፊደል" />
             </xpath>
             <xpath expr="//field[@name='birthday']" position="replace">
