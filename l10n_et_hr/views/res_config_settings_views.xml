@@ -8,11 +8,17 @@
         <field name="inherit_id" ref="hr.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//app[@data-string='Employees']" position="inside">
-                <block title="Ethiopian Localization" name="ethiopian_localization_setting_container">
-                    <setting help="Display employee names, department names and job titles in the Amharic script" id="ethiopian_localization_setting">
-                        <field name="use_ethiopic_employee_name"/>
-                        <field name="use_ethiopic_department_name"/>
-                        <field name="use_ethiopic_job_name"/>
+                <block
+                    title="Ethiopian Localization"
+                    name="ethiopian_localization_setting_container"
+                >
+                    <setting
+                        help="Display employee names, department names and job titles in the Amharic script"
+                        id="ethiopian_localization_setting"
+                    >
+                        <field name="use_ethiopic_employee_name" />
+                        <field name="use_ethiopic_department_name" />
+                        <field name="use_ethiopic_job_name" />
                     </setting>
                 </block>
             </xpath>
