@@ -18,10 +18,8 @@
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <xpath expr="/form/sheet/div[hasclass('oe_title')]/h1" position="after">
-                <h1>
-                    <field name="ethiopic_name" placeholder="ሥም በአማርኛ ፊደል" />
-                </h1>
+            <xpath expr="/form/sheet/div/div[hasclass('oe_title')]/h1/field[@name='name']" position="after">
+                <field name="ethiopic_name" placeholder="ሥም በአማርኛ ፊደል" />
             </xpath>
             <xpath expr="//field[@name='birthday']" position="replace">
                 <field name="use_ethiopic_dob" />
@@ -67,18 +65,6 @@
         <field name="name">hr.employee.kanban.l10n_et_hr</field>
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.hr_kanban_view_employees" />
-        <field name="priority">99</field>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='name']" position="replace">
-                <field name="display_name" />
-            </xpath>
-        </field>
-    </record>
-
-    <record id="view_partner_tree2" model="ir.ui.view">
-        <field name="name">hr.employee.tree.l10n_et_hr</field>
-        <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr.view_partner_tree2" />
         <field name="priority">99</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="replace">
