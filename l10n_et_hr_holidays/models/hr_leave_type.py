@@ -5,13 +5,11 @@ from odoo import fields, models
 
 
 class HrLeaveType(models.Model):
-
     _inherit = "hr.leave.type"
 
     ethiopic_name = fields.Char()
 
     exclude_rest_days = fields.Boolean(
-        string="Exclude Rest Days",
         help="If this is enabled, rest days will not be counted as leave days.",
     )
 
