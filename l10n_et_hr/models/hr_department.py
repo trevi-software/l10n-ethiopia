@@ -5,13 +5,11 @@ from odoo import api, fields, models
 
 
 class HrDepartment(models.Model):
-
     _inherit = "hr.department"
 
     ethiopic_name = fields.Char()
 
     def name_get(self):
-
         res = []
         use_ethiopic_name = (
             self.env["ir.config_parameter"]
@@ -30,7 +28,6 @@ class HrDepartment(models.Model):
 
     @api.depends("name", "ethiopic_name", "parent_id.complete_name")
     def _compute_complete_name(self):
-
         use_ethiopic_name = (
             self.env["ir.config_parameter"]
             .sudo()
