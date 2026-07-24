@@ -6,7 +6,6 @@ from odoo import fields, models
 
 
 class ResPartner(models.Model):
-
     _inherit = "res.partner"
 
     tz = fields.Selection(default="Africa/Addis_Ababa")
