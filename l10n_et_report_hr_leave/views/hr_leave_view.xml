@@ -54,11 +54,9 @@
                     <div>
                         <field
                             name="return_date_et"
-                            attrs="{
-                                'readonly': [('state', 'not in', ('draft', 'confirm'))],
-                                'invisible': ['|', ('request_unit_half', '=', True), ('request_unit_hours', '=', True)],
-                                'required': ['|', ('date_from', '=', False), ('date_to', '=', False)]
-                            }"
+                            readonly="state not in ['draft', 'confirm']"
+                            invisible="request_unit_half or request_unit_hours"
+                            required="not date_from or not date_to"
                         />
                     </div>
                     <div class="o_row">
