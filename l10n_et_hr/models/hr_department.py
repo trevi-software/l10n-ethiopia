@@ -39,11 +39,12 @@ class HrDepartment(models.Model):
                 if department.ethiopic_name:
                     name = department.ethiopic_name
                 if department.parent_id:
-                    department.complete_name = "%s / %s" % (
-                        department.parent_id.complete_name,
-                        name,
+                    department.complete_name = (
+                        f"{department.parent_id.complete_name} / {name}"
                     )
                 else:
                     department.complete_name = name
         else:
             super()._compute_complete_name()
+
+        return self
