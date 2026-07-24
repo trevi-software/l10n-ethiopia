@@ -49,9 +49,7 @@
         <field name="inherit_id" ref="hr_holidays.hr_leave_view_form" />
         <field name="arch" type="xml">
             <data>
-                <xpath
-                    expr="//div[@name='duration_display']" position="after"
-                >
+                <xpath expr="//div[@name='duration_display']" position="after">
                     <label for="return_date_et" string="Return Date (Ethiopic)" />
                     <div>
                         <field
