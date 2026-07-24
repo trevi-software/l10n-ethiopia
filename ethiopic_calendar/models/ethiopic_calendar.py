@@ -115,7 +115,6 @@ ethiopic_date = pcc.ethiopic_date
 
 
 def get_etyear_selection(start_delta=-20, end_delta=100):
-
     res = []
 
     # Assume a period within the last 20 years and the next 100
