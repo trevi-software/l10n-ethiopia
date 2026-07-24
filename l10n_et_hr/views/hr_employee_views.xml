@@ -30,25 +30,25 @@
                     <div>
                         <field
                             name="etcal_dob_month"
-                            attrs="{'invisible': [('use_ethiopic_dob','=',False)]}"
+                            invisible="not use_ethiopic_dob"
                             nolabel="1"
                             class="oe_inline"
                         />
                         <field
                             name="etcal_dob_day"
-                            attrs="{'invisible': [('use_ethiopic_dob','=',False)]}"
+                            invisible="not use_ethiopic_dob"
                             nolabel="1"
                             class="oe_inline"
                         />
                         <field
                             name="etcal_dob_year"
-                            attrs="{'invisible': [('use_ethiopic_dob','=',False)]}"
+                            invisible="not use_ethiopic_dob"
                             nolabel="1"
                             class="oe_inline"
                         />
                         <field
                             name="birthday"
-                            attrs="{'invisible': [('use_ethiopic_dob','=',True)]}"
+                            invisible="use_ethiopic_dob"
                         />
                     </div>
                 </xpath>
