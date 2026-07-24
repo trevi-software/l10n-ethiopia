@@ -14,12 +14,10 @@ from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
 
 
 class NewLabour(models.TransientModel):
-
     _inherit = "hr.employee.wizard.new"
 
     @api.model
     def _get_year(self):
-
         res = []
 
         # Assuming employees are at least 16 years old
@@ -64,7 +62,6 @@ class NewLabour(models.TransientModel):
 
     @api.onchange("etcal_dob_month", "etcal_dob_day", "etcal_dob_year")
     def onchange_etdob(self):
-
         res = {"value": {"birth_date": False}}
         if self.etcal_dob_day and self.etcal_dob_month and self.etcal_dob_year:
             dob = pcc.gregorian_from_fixed(
@@ -82,7 +79,6 @@ class NewLabour(models.TransientModel):
         return res
 
     def create_partner(self):
-
         res = super().create_partner()
         for rec in self:
             hno = rec.house_no and ("House No: " + rec.house_no) or ""
@@ -96,7 +92,6 @@ class NewLabour(models.TransientModel):
         return res
 
     def _create_hr_applicant(self, partner):
-
         res = super()._create_hr_applicant(partner)
         applicant_vals = {
             "education": self.education,
@@ -110,7 +105,6 @@ class NewLabour(models.TransientModel):
         return res
 
     def _get_employee_values(self, context):
-
         res = super()._get_employee_values(context)
         res.update(
             {
