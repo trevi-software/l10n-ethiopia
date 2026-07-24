@@ -2,9 +2,7 @@
 <odoo noupdate="1">
 
     <record id="register_FITA" model="hr.contribution.register">
-        <field
-            name="name"
-        >Federal Income Tax Withholding Register (929/2016)</field>
+        <field name="name">Federal Income Tax Withholding Register (929/2016)</field>
         <field name="partner_id" eval="False" />
     </record>
 
@@ -78,8 +76,8 @@
         <field name="amount_percentage" eval="0" />
         <field name="amount_fix" eval="50" />
         <field
-                name="amount_python_compute"
-            >result = 105.00 * current_contract.ppf</field>
+            name="amount_python_compute"
+        >result = 105.00 * current_contract.ppf</field>
         <field name="amount_percentage_base" />
         <field name="parent_rule_id" ref="hr_payroll_rule_fit" />
         <field name="category_id" ref="payroll_default_salary_rules.INCTAX" />
@@ -112,8 +110,8 @@
         <field name="amount_percentage" eval="0" />
         <field name="amount_fix" eval="162.5" />
         <field
-                name="amount_python_compute"
-            >result = 337.50 * current_contract.ppf</field>
+            name="amount_python_compute"
+        >result = 337.50 * current_contract.ppf</field>
         <field name="amount_percentage_base" />
         <field name="parent_rule_id" ref="hr_payroll_rule_fit" />
         <field name="category_id" ref="payroll_default_salary_rules.INCTAX" />
@@ -146,8 +144,8 @@
         <field name="amount_percentage" eval="0" />
         <field name="amount_fix" eval="352.5" />
         <field
-                name="amount_python_compute"
-            >result = 747.50 * current_contract.ppf</field>
+            name="amount_python_compute"
+        >result = 747.50 * current_contract.ppf</field>
         <field name="amount_percentage_base" />
         <field name="parent_rule_id" ref="hr_payroll_rule_fit" />
         <field name="category_id" ref="payroll_default_salary_rules.INCTAX" />
@@ -197,8 +195,8 @@
         <field name="amount_fix" eval="0" />
         <field name="amount_python_compute" />
         <field
-                name="amount_percentage_base"
-            >(EMT - 10900) * current_contract.ppf</field>
+            name="amount_percentage_base"
+        >(EMT - 10900) * current_contract.ppf</field>
         <field name="parent_rule_id" ref="hr_payroll_rule_fit" />
         <field name="category_id" ref="payroll_default_salary_rules.INCTAX" />
         <field name="sequence" eval="121" />
