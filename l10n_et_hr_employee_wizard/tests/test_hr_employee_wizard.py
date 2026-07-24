@@ -96,7 +96,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_onchange_dob(self):
-
         f = Form(self.env["hr.employee.wizard.new"])
         f.name = "Jean-luc Picard"
         f.ethiopic_name = "ዦን-ሉክ ፒካርድ"
