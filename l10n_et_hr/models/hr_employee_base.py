@@ -5,13 +5,11 @@ from odoo import fields, models
 
 
 class HrEmployeePublic(models.AbstractModel):
-
     _inherit = "hr.employee.base"
 
     ethiopic_name = fields.Char()
 
     def name_get(self):
-
         res = []
         use_ethiopic_name = (
             self.env["ir.config_parameter"]
