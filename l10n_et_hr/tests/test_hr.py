@@ -31,7 +31,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_name_get(self):
-
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
             "l10n_et_hr.use_ethiopic_employee_name"
         )
@@ -46,7 +45,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_name_get_ethiopic(self):
-
         self.env["ir.config_parameter"].set_param(
             "l10n_et_hr.use_ethiopic_employee_name", True
         )
@@ -63,7 +61,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_onchange_dob(self):
-
         f = Form(self.Employee)
         f.name = "Test"
         f.use_ethiopic_dob = (True,)
@@ -78,7 +75,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_department_name_get(self):
-
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
             "l10n_et_hr.use_ethiopic_department"
         )
@@ -95,7 +91,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_department_name_get_ethiopic(self):
-
         self.env["ir.config_parameter"].set_param(
             "l10n_et_hr.use_ethiopic_department", True
         )
@@ -114,7 +109,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_job_name_get(self):
-
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
             "l10n_et_hr.use_ethiopic_job"
         )
@@ -129,7 +123,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_job_name_get_ethiopic(self):
-
         self.env["ir.config_parameter"].set_param("l10n_et_hr.use_ethiopic_job", True)
 
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(
@@ -144,7 +137,6 @@ class RecruitmentTestCase(TransactionCase):
         )
 
     def test_employee_name_get(self):
-
         self.assertEqual(
             self.ee.name_get()[0][1],
             "Mike",

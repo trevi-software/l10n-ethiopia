@@ -14,12 +14,10 @@ from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
 
 
 class HrEmployee(models.Model):
-
     _inherit = "hr.employee"
 
     @api.model
     def _get_year(self):
-
         res = []
 
         # Assuming employees are at least 16 years old
@@ -65,7 +63,6 @@ class HrEmployee(models.Model):
 
     @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
     def onchange_etdob(self):
-
         for rec in self:
             if rec.etcal_dob_day and rec.etcal_dob_month and rec.etcal_dob_year:
                 dob = pcc.gregorian_from_fixed(
