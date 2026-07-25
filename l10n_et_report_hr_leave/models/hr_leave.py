@@ -24,9 +24,9 @@ class HrLeave(models.Model):
 
     return_date_et = fields.Char("Ethiopic Return Date")
 
-    local_date_from = fields.Datetime(compute="_compute_date_from_to")
+    local_date_from = fields.Datetime(compute="_compute_local_date_from_to")
 
-    local_date_to = fields.Datetime(compute="_compute_date_from_to")
+    local_date_to = fields.Datetime(compute="_compute_local_date_from_to")
 
     rest_days = fields.Float(
         "Rest (Days)",
@@ -221,7 +221,7 @@ class HrLeave(models.Model):
         return hrm_data
 
     @api.depends("date_from", "date_to")
-    def _compute_date_from_to(self):
+    def _compute_local_date_from_to(self):
         for record in self:
             if record.date_from:
                 record.local_date_from = (
