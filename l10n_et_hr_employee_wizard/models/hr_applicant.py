@@ -58,7 +58,6 @@ class HrApplicant(models.Model):
 
     @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
     def onchange_etdob(self):
-        res = {"value": {"birth_date": False}}
         if self.etcal_dob_day and self.etcal_dob_month and self.etcal_dob_year:
             dob = pcc.gregorian_from_fixed(
                 pcc.fixed_from_ethiopic(
@@ -69,10 +68,12 @@ class HrApplicant(models.Model):
                     )
                 )
             )
-            res["value"]["birth_date"] = fields.Date.to_string(
-                date(year=dob[0], month=dob[1], day=dob[2])
-            )
-        return res
+            return {
+                "birth_date": fields.Date.to_string(
+                    date(year=dob[0], month=dob[1], day=dob[2])
+                )
+            }
+        return {"birth_date": False}
 
     def create_employee_from_applicant(self):
         res = super().create_employee_from_applicant()
