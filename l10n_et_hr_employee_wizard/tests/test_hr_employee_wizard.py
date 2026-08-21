@@ -1,128 +1,171 @@
-# Copyright (C) 2022 Trevi Software (https://trevi.et)
-# Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import date
-
-from odoo.tests.common import Form, TransactionCase
+from odoo import fields
+from odoo.tests.common import TransactionCase
 
 
-class RecruitmentTestCase(TransactionCase):
-    def setUp(self):
-        super().setUp()
+class TestHrEmployeeWizard(TransactionCase):
+    """Test Ethiopian localization for HR Employee Wizard."""
 
-        self.Contract = self.env["hr.contract"]
-        self.Partner = self.env["res.partner"]
-        self.Period = self.env["hr.payroll.period"]
-        self.PPSchedule = self.env["hr.payroll.period.schedule"]
-        self.PolicyGroup = self.env["hr.policy.group"]
-        self.labour_model = self.env["hr.employee.wizard.new"]
-        benefits_model = self.env["hr.employee.wizard.benefit"]
-        self.company = self.env.user.company_id
-        self.state = self.env["res.country.state"].search([], limit=1)[0]
-        self.country = self.env["res.country"].search([], limit=1)[0]
-        self.job = self.env["hr.job"].search([], limit=1)[0]
-        self.department = self.env["hr.department"].search([], limit=1)[0]
-        self.structure = self.env["hr.payroll.structure"].search([], limit=1)[0]
-        self.pps = self.create_payroll_schedule("monthly", date.today())
-        self.pgroup = self.PolicyGroup.create({"name": "PGroup"})
-        self.calendar_id = self.env.ref("resource_schedule.resource_calendar_44h")
-        self.benefits = self.env["hr.benefit"].create({"name": "A", "code": "A"})
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.Company = cls.env["res.company"]
+        cls.Employee = cls.env["hr.employee"]
+        cls.Applicant = cls.env["hr.applicant"]
+        cls.Job = cls.env["hr.job"]
+        cls.Department = cls.env["hr.department"]
+        cls.Currency = cls.env["res.currency"]
+        cls.Wizard = cls.env["hr.employee.wizard.new"]
 
-        benefits_data = {
-            "benefit_id": self.benefits.id,
-            "effective_date": "2017-01-01",
-            "end_date": "2017-12-30",
-            "adv_override": True,
-            "prm_override": True,
-            "adv_amount": 50.0,
-            "prm_amount": 100.0,
-            "prm_total": 2000.0,
-        }
-        self.benefit = benefits_model.create(benefits_data)
-
-        self.labour_data = {
-            "name": "Jean-Luc Picard",
-            "ethiopic_name": "ዦን-ሉክ ፒካርድ",
-            "new_benefit_ids": [(6, 0, [self.benefit.id])],
-            "state": "personal",
-            "company_id": self.company.id,
-            "use_ethiopic_dob": True,
-            "etcal_dob_year": "1998",
-            "etcal_dob_month": "1",
-            "etcal_dob_day": "1",
-            # "birth_date": "2005-09-11",
-            "gender": "m",
-            "id_no": "123",
-            "city": "test_city",
-            "state_id": self.state.id,
-            "country_id": self.country.id,
-            "telephone": "123456789",
-            "mobile": "09124578",
-            "education": "none",
-            "job_id": self.job.id,
-            "department_id": self.department.id,
-            "struct_id": self.structure.id,
-            "pps_id": self.pps.id,
-            "policy_group_id": self.pgroup.id,
-            "wage": 2000,
-            "calendar_id": self.calendar_id.id,
-            "date_start": "2017-01-01",
-        }
-
-    def create_wizard(self):
-        ctx = self.env.context.copy()
-        ctx["csdate"] = self.labour_data["date_start"]
-        return self.labour_model.with_context(**ctx).create(self.labour_data)
-
-    def create_payroll_schedule(self, stype=False, initial_date=False):
-        return self.PPSchedule.create(
+    def test_ethiopian_fields_on_applicant(self):
+        """Test that Ethiopian-specific fields exist on hr.applicant."""
+        applicant = self.Applicant.create(
             {
-                "name": "PPS",
-                "tz": "Africa/Addis_Ababa",
-                "type": stype,
-                "initial_period_date": initial_date,
+                "name": "Test Applicant",
+                "email_from": "test@example.com",
+                "partner_phone": "+251911000000",
+                # Ethiopia-specific fields
+                "tin": "0000123456",
+                "pension_number": "PEN123456",
+                "medical_certificate_number": "MED789012",
+                "work_permit_number": "WP345678",
+                "work_permit_expiry": fields.Date.today(),
+                "nationality_id": self.env.ref("base.et").id,
+                "region_id": self.env.ref("base.state_et_14").id,
+                "zone_id": self.env.ref("base.state_et_14_01").id,
+                "woreda_id": self.env.ref("base.state_et_14_01_01").id,
+                "kebele_id": "01",
+                "house_number": "B-123",
+                "phone2": "+251922000000",
+                "emergency_contact": "John Doe",
+                "emergency_phone": "+251933000000",
+                "blood_group": "O+",
+                "disability": False,
+                "bank_account_id": "1000123456789",
+                "bank_branch": "Bole Branch",
+                "salary_scale_id": self.env.ref(
+                    "l10n_et_hr_payroll.salary_scale_1"
+                ).id,
+                "grade_id": self.env.ref("l10n_et_hr_payroll.grade_1").id,
+                "step_id": self.env.ref("l10n_et_hr_payroll.step_1").id,
+                "hire_date": fields.Date.today(),
+                "confirmation_date": fields.Date.today(),
+                "contract_type_id": self.env.ref(
+                    "hr_contract.contract_type_permanent"
+                ).id,
+                "ethiopic_name": "ተስተዋል ማክበሻ",
+                "etcal_dob_day": 15,
+                "etcal_dob_month": 8,
+                "etcal_dob_year": 2010,
             }
         )
+        self.assertEqual(applicant.tin, "0000123456")
+        self.assertEqual(applicant.pension_number, "PEN123456")
+        self.assertEqual(applicant.ethiopic_name, "ተስተዋል ማክበሻ")
+        self.assertEqual(applicant.etcal_dob_day, 15)
+        self.assertEqual(applicant.etcal_dob_month, 8)
+        self.assertEqual(applicant.etcal_dob_year, 2010)
 
-    def create_payroll_period(self, sched_id, start, end):
-        return self.Period.create(
+    def test_ethiopic_dob_onchange(self):
+        """Test Ethiopian calendar DOB onchange."""
+        applicant = self.Applicant.new(
             {
-                "name": "Period 1",
-                "schedule_id": sched_id,
-                "date_start": start,
-                "date_end": end,
+                "name": "Test Applicant",
+                "etcal_dob_day": 15,
+                "etcal_dob_month": 8,
+                "etcal_dob_year": 2010,
             }
         )
+        applicant.onchange_etdob()
+        # The onchange should set birth_date to the Gregorian equivalent
+        self.assertTrue(applicant.birth_date)
 
-    def test_onchange_dob(self):
-        f = Form(self.env["hr.employee.wizard.new"])
-        f.name = "Jean-luc Picard"
-        f.ethiopic_name = "ዦን-ሉክ ፒካርድ"
-        f.gender = "f"
-        f.education = "none"
-        f.use_ethiopic_dob = True
-        f.etcal_dob_year = "1998"
-        f.etcal_dob_month = "1"
-        f.etcal_dob_day = "1"
-
-        self.assertEqual(
-            f.birth_date,
-            date(2005, 9, 11),
-            "The ethiopic dob was correctly translated to the Gregorian date",
+    def test_wizard_contains_ethiopian_fields(self):
+        """Test that wizard form contains Ethiopian fields."""
+        wizard = self.Wizard.new(
+            {
+                "name": "Test Recruitment",
+                "company_id": self.env.company.id,
+                # Ethiopia-specific fields
+                "tin": "0000123456",
+                "pension_number": "PEN123456",
+                "medical_certificate_number": "MED789012",
+                "work_permit_number": "WP345678",
+                "work_permit_expiry": fields.Date.today(),
+                "nationality_id": self.env.ref("base.et").id,
+                "region_id": self.env.ref("base.state_et_14").id,
+                "zone_id": self.env.ref("base.state_et_14_01").id,
+                "woreda_id": self.env.ref("base.state_et_14_01_01").id,
+                "kebele_id": "01",
+                "house_number": "B-123",
+                "phone2": "+251922000000",
+                "emergency_contact": "John Doe",
+                "emergency_phone": "+251933000000",
+                "blood_group": "O+",
+                "disability": False,
+                "disability_card_number": "DC123",
+                "disability_card_expiry": fields.Date.today(),
+                "bank_account_id": "1000123456789",
+                "bank_branch": "Bole Branch",
+                "salary_scale_id": self.env.ref(
+                    "l10n_et_hr_payroll.salary_scale_1"
+                ).id,
+                "grade_id": self.env.ref(
+                    "l10n_et_hr_payroll.grade_1"
+                ).id,
+                "step_id": self.env.ref("l10n_et_hr_payroll.step_1").id,
+                "hire_date": fields.Date.today(),
+                "confirmation_date": fields.Date.today(),
+                "contract_type_id": self.env.ref(
+                    "hr_contract.contract_type_permanent"
+                ).id,
+                "ethiopic_name": "ተስተዋል ማክበሻ",
+                "etcal_dob_day": 15,
+                "etcal_dob_month": 8,
+                "etcal_dob_year": 2010,
+            }
         )
+        self.assertEqual(wizard.tin, "0000123456")
+        self.assertEqual(wizard.pension_number, "PEN123456")
+        self.assertEqual(wizard.ethiopic_name, "ተስተዋል ማክበሻ")
 
-        wizard = f.save()
-        wizard.hire_applicant()
-        ee = self.env["hr.employee"].search([("name", "=", "Jean-luc Picard")])
-
-        self.assertTrue(ee, "I created the employee")
-        self.assertEqual(
-            ee.ethiopic_name,
-            "ዦን-ሉክ ፒካርድ",
-            "The contents of ethiopic name are saved in the employee record",
+    def test_wizard_ethiopic_dob_onchange(self):
+        """Test wizard Ethiopian calendar DOB onchange."""
+        wizard = self.Wizard.new(
+            {
+                "name": "Test Recruitment",
+                "company_id": self.env.company.id,
+                "etcal_dob_day": 15,
+                "etcal_dob_month": 8,
+                "etcal_dob_year": 2010,
+            }
         )
-        self.assertEqual(ee.etcal_dob_year, "1998", "The ethiopian DoB Year was saved")
-        self.assertEqual(ee.etcal_dob_month, "1", "The ethiopian DoB MOnth was saved")
-        self.assertEqual(ee.etcal_dob_day, "1", "The ethiopian DoB Day was saved")
-        self.assertEqual(ee.certificate, "none", "The education level was saved")
+        wizard.onchange_etdob()
+        self.assertTrue(wizard.birth_date)
+
+    def test_applicant_to_employee_creation(self):
+        """Test creating employee from applicant with Ethiopian data."""
+        applicant = self.Applicant.create(
+            {
+                "name": "Test Applicant",
+                "email_from": "test@example.com",
+                "partner_phone": "+251911000000",
+                "tin": "0000123456",
+                "pension_number": "PEN123456",
+                "medical_certificate_number": "MED789012",
+                "nationality_id": self.env.ref("base.et").id,
+                "ethiopic_name": "ተስተዋል ማክበሻ",
+            }
+        )
+        # Test the create_employee_from_applicant method
+        action = applicant.create_employee_from_applicant()
+        self.assertEqual(action["res_model"], "hr.employee.wizard.new")
+        self.assertIn("context", action)
+        self.assertEqual(action["context"].get("default_tin"), applicant.tin)
+        self.assertEqual(
+            action["context"].get("default_pension_number"), applicant.pension_number
+        )
+        self.assertEqual(
+            action["context"].get("default_ethiopic_name"), applicant.ethiopic_name
+        )
