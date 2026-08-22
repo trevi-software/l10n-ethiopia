@@ -12,7 +12,7 @@
     "author": "TREVI Software",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
-        "hr_leave",
+        "hr_holidays",
         "ethiopic_calendar",
         "report_py3o",
     ],
