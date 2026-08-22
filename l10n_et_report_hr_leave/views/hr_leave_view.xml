@@ -6,10 +6,7 @@
         <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
         <field name="arch" type="xml">
             <data>
-                <xpath
-                    expr="/form/sheet/div/div[hasclass('oe_title')]/h1/field[@name='name']"
-                    position="after"
-                >
+                <xpath expr="//field[@name='name']" position="after">
                     <h1>
                         <field name="ethiopic_name" placeholder="ስም በአማርኛ" />
                     </h1>
