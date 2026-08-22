@@ -12,7 +12,7 @@
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
         "hr_holidays",
-        "hr_holidays_public",
+        "calendar_public_holiday",
     ],
     "data": [
         "views/hr_leave_type_view.xml",
