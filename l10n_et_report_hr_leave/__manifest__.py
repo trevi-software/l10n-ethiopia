@@ -13,6 +13,7 @@
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
         "hr_holidays",
+        "calendar_public_holiday",
         "ethiopic_calendar",
         "report_py3o",
     ],

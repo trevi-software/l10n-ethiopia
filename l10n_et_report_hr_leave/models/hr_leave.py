@@ -77,7 +77,7 @@ class HrLeave(models.Model):
 
     def _compute_public_holiday_days(self):
         for record in self:
-            public_holidays = self.env["hr.holidays.public.line"].search(
+            public_holidays = self.env["calendar.public.holiday.line"].search(
                 [
                     ("date", ">=", record.date_from),
                     ("date", "<", record.date_to),
