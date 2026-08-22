@@ -4,21 +4,18 @@ from odoo import api, models
 class HrLeave(models.Model):
     _inherit = "hr.leave"
 
-    def _get_number_of_days(self, date_from, date_to, employee_id):
-        if self.holiday_status_id.exclude_rest_days or not self.holiday_status_id:
-            instance = self.with_context(
-                employee_id=employee_id, exclude_rest_days=True
-            )
-        else:
-            instance = self
-        return super(HrLeave, instance)._get_number_of_days(
-            date_from, date_to, employee_id
+    def _get_durations(self, check_leave_type=True, resource_calendar=None):
+        """Override to handle exclude_rest_days context for public holidays."""
+        if self.env.context.get("exclude_rest_days"):
+            self = self.with_context(exclude_rest_days=True)
+        return super()._get_durations(
+            check_leave_type=check_leave_type, resource_calendar=resource_calendar
         )
 
     @api.depends("number_of_days")
     def _compute_number_of_hours_display(self):
-        """If the leave is validated, no call to `_get_number_of_days` is done, so we
-        need to inject the context here for including the public holidays if applicable.
+        """If the leave is validated, we need to inject the context here for
+        including the public holidays if applicable.
 
         For such cases, we need to serialize the call to super in fragments.
         """
