@@ -3,12 +3,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
-from datetime import datetime
 
 from pytz import UTC, timezone
 
 from odoo import api, fields, models
-from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT as OE_DTFORMAT
 from odoo.tools.translate import _
 
 from odoo.addons.ethiopic_calendar.models.ethiopic_calendar import (
@@ -153,14 +151,14 @@ class HrLeave(models.Model):
     def format_date(self, date_str):
         if not date_str:
             return ""
-        d = datetime.strptime(date_str, OE_DTFORMAT)
+        d = fields.Datetime.to_datetime(date_str)
         return d.strftime("%b %d, %Y")
 
     @api.model
     def format_date_et(self, date_str):
         if not date_str:
             return ""
-        d = datetime.strptime(date_str, OE_DTFORMAT)
+        d = fields.Datetime.to_datetime(date_str)
         return self.env["hr.leave"].time2ethiopic(d.year, d.month, d.day)
 
     @api.model
@@ -176,7 +174,7 @@ class HrLeave(models.Model):
             if leave.state not in ["validate", "validate1"]:
                 days = (
                     res[leave.holiday_status_id.id]["remaining_leaves"]
-                    - leave.number_of_days_temp
+                    - leave.number_of_days_display
                 )
         else:
             days = ""
@@ -199,7 +197,7 @@ class HrLeave(models.Model):
 
             # We only want leaves taken so far, *EXCLUDING* this one
             if leave.state in ["validate", "validate1"]:
-                days -= leave.number_of_days_temp
+                days -= leave.number_of_days_display
         else:
             days = ""
 

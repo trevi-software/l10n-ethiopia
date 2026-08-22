@@ -5,14 +5,14 @@
 {
     "name": "Ethiopia - Individual Leave Report",
     "summary": "Employeee HR Leave application and report for Ethiopia",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
-        "hr_holidays",
+        "hr_leave",
         "ethiopic_calendar",
         "report_py3o",
     ],
