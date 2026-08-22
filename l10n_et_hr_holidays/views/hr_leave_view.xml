@@ -12,10 +12,6 @@
                 >state in ['cancel', 'refuse', 'validate', 'validate1']</attribute>
                 <attribute name="widget">many2one_avatar_user</attribute>
             </xpath>
-            <xpath expr="//field[@name='holiday_status_id']" position="before">
-                <field name="ethiopic_date_from" invisible="1" />
-                <field name="ethiopic_date_to" invisible="1" />
-            </xpath>
         </field>
     </record>
 </odoo>
