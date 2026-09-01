@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <!-- Leave Application -->
     <record id="report_leave" model="ir.actions.report">
         <field name="name">Leave Application</field>
@@ -12,5 +11,4 @@
         <field name="py3o_template_fallback">report/leave_application.odt</field>
         <field name="binding_model_id" ref="model_hr_leave" />
     </record>
-
 </odoo>
