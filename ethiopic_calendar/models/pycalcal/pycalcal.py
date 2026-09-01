@@ -35,7 +35,6 @@ Author: Enrico Spinielli
 
 
 # use true division
-from __future__ import division
 
 # Precision in bits, for places where CL postfixes numbers with L0, meaning
 # at least 50 bits of precision
@@ -197,7 +196,7 @@ def sigma(l, b):
     # >>> from operator import add
     # >>> reduce(add, temp)
     # 780
-    return sum(b(*e) for e in zip(*l))
+    return sum(b(*e) for e in zip(*l, strict=False))
 
 
 # see lines 315-321 in calendrica-3.0.cl
@@ -257,6 +256,7 @@ DAYS_OF_WEEK_NAMES = {
     FRIDAY: "Friday",
     SATURDAY: "Saturday",
 }
+
 
 # see lines 366-369 in calendrica-3.0.cl
 def day_of_week_from_fixed(date):
@@ -387,6 +387,7 @@ def is_in_range(tee, range):
 # see lines 442-445 in calendrica-3.0.cl
 JD_EPOCH = rd(mpf(-1721424.5))
 
+
 # see lines 447-450 in calendrica-3.0.cl
 def moment_from_jd(jd):
     """Return the moment corresponding to the Julian day number 'jd'."""
@@ -414,6 +415,7 @@ def jd_from_fixed(date):
 # see lines 467-470 in calendrica-3.0.cl
 MJD_EPOCH = rd(678576)
 
+
 # see lines 472-475 in calendrica-3.0.cl
 def fixed_from_mjd(mjd):
     """Return the fixed date corresponding to modified Julian day 'mjd'."""
@@ -437,6 +439,7 @@ def egyptian_date(year, month, day):
 
 # see lines 520-525 in calendrica-3.0.cl
 EGYPTIAN_EPOCH = fixed_from_jd(1448638)
+
 
 # see lines 527-536 in calendrica-3.0.cl
 def fixed_from_egyptian(e_date):
@@ -465,6 +468,7 @@ def armenian_date(year, month, day):
 
 # see lines 560-564 in calendrica-3.0.cl
 ARMENIAN_EPOCH = rd(201443)
+
 
 # see lines 566-575 in calendrica-3.0.cl
 def fixed_from_armenian(a_date):
@@ -885,6 +889,7 @@ def julian_date(year, month, day):
 # see lines 1042-1045 in calendrica-3.0.cl
 JULIAN_EPOCH = fixed_from_gregorian(gregorian_date(0, DECEMBER, 30))
 
+
 # see lines 1047-1050 in calendrica-3.0.cl
 def bce(n):
     """Retrun a negative value to indicate a BCE Julian year."""
@@ -946,6 +951,7 @@ NONES = 2
 
 # see lines 1123-1126 in calendrica-3.0.cl
 IDES = 3
+
 
 # see lines 1128-1131 in calendrica-3.0.cl
 def roman_date(year, month, event, count, leap):
@@ -1053,6 +1059,7 @@ def roman_from_fixed(date):
 # see lines 1231-1234 in calendrica-3.0.cl
 YEAR_ROME_FOUNDED = bce(753)
 
+
 # see lines 1236-1241 in calendrica-3.0.cl
 def julian_year_from_auc_year(year):
     """Return the Julian year equivalent to AUC year 'year'."""
@@ -1158,6 +1165,7 @@ def coptic_date(year, month, day):
 # see lines 1281-1284 in calendrica-3.0.cl
 COPTIC_EPOCH = fixed_from_julian(julian_date(ce(284), AUGUST, 29))
 
+
 # see lines 1286-1289 in calendrica-3.0.cl
 def is_coptic_leap_year(c_year):
     """Return True if Coptic year 'c_year' is a leap year
@@ -1193,6 +1201,7 @@ def ethiopic_date(year, month, day):
 
 # see lines 1325-1328 in calendrica-3.0.cl
 ETHIOPIC_EPOCH = fixed_from_julian(julian_date(ce(8), AUGUST, 29))
+
 
 # see lines 1330-1339 in calendrica-3.0.cl
 def fixed_from_ethiopic(e_date):
@@ -1296,6 +1305,7 @@ def islamic_date(year, month, day):
 # see lines 1441-1444 in calendrica-3.0.cl
 ISLAMIC_EPOCH = fixed_from_julian(julian_date(ce(622), JULY, 16))
 
+
 # see lines 1446-1449 in calendrica-3.0.cl
 def is_islamic_leap_year(i_year):
     """Return True if i_year is an Islamic leap year."""
@@ -1398,6 +1408,7 @@ ADARII = 13
 
 # see lines 1581-1585 in calendrica-3.0.cl
 HEBREW_EPOCH = fixed_from_julian(julian_date(bce(3761), OCTOBER, 7))
+
 
 # see lines 1587-1590 in calendrica-3.0.cl
 def is_hebrew_leap_year(h_year):
@@ -1852,6 +1863,7 @@ def mayan_tzolkin_name(date):
 # see lines 2039-2044 in calendrica-3.0.cl
 MAYAN_EPOCH = fixed_from_jd(584283)
 
+
 # see lines 2046-2060 in calendrica-3.0.cl
 def fixed_from_mayan_long_count(count):
     """Return fixed date corresponding to the Mayan long count count,
@@ -1893,6 +1905,7 @@ def mayan_haab_ordinal(h_date):
 # see lines 2083-2087 in calendrica-3.0.cl
 MAYAN_HAAB_EPOCH = MAYAN_EPOCH - mayan_haab_ordinal(mayan_haab_date(18, 8))
 
+
 # see lines 2089-2096 in calendrica-3.0.cl
 def mayan_haab_from_fixed(date):
     """Return Mayan haab date of fixed date date."""
@@ -1919,6 +1932,7 @@ def mayan_tzolkin_ordinal(t_date):
 
 # see lines 2116-2120 in calendrica-3.0.cl
 MAYAN_TZOLKIN_EPOCH = MAYAN_EPOCH - mayan_tzolkin_ordinal(mayan_tzolkin_date(4, 20))
+
 
 # see lines 2122-2128 in calendrica-3.0.cl
 def mayan_tzolkin_from_fixed(date):
@@ -2023,6 +2037,7 @@ def aztec_xiuhmolpilli_name(date):
 # see lines 2212-2215 in calendrica-3.0.cl
 AZTEC_CORRELATION = fixed_from_julian(julian_date(1521, AUGUST, 13))
 
+
 # see lines 2217-2223 in calendrica-3.0.cl
 def aztec_xihuitl_ordinal(x_date):
     """Return the number of elapsed days into cycle of Aztec xihuitl
@@ -2036,6 +2051,7 @@ def aztec_xihuitl_ordinal(x_date):
 AZTEC_XIHUITL_CORRELATION = AZTEC_CORRELATION - aztec_xihuitl_ordinal(
     aztec_xihuitl_date(11, 2)
 )
+
 
 # see lines 2231-2237 in calendrica-3.0.cl
 def aztec_xihuitl_from_fixed(date):
@@ -2067,6 +2083,7 @@ def aztec_tonalpohualli_ordinal(t_date):
 AZTEC_TONALPOHUALLI_CORRELATION = AZTEC_CORRELATION - aztec_tonalpohualli_ordinal(
     aztec_tonalpohualli_date(1, 5)
 )
+
 
 # see lines 2264-2270 in calendrica-3.0.cl
 def aztec_tonalpohualli_from_fixed(date):
@@ -2162,6 +2179,7 @@ def hindu_solar_date(year, month, day):
 # see lines 2348-2351 in calendrica-3.0.cl
 HINDU_EPOCH = fixed_from_julian(julian_date(bce(3102), FEBRUARY, 18))
 
+
 # see lines 2353-2356 in calendrica-3.0.cl
 def hindu_day_count(date):
     """Return elapsed days (Ahargana) to date date since Hindu epoch (KY)."""
@@ -2173,6 +2191,7 @@ ARYA_SOLAR_YEAR = 1577917500 / 4320000
 
 # see lines 2363-2366 in calendrica-3.0.cl
 ARYA_SOLAR_MONTH = ARYA_SOLAR_YEAR / 12
+
 
 # see lines 2368-2378 in calendrica-3.0.cl
 def old_hindu_solar_from_fixed(date):
@@ -2216,6 +2235,7 @@ ARYA_LUNAR_MONTH = 1577917500 / 53433336
 
 # see lines 2397-2400 in calendrica-3.0.cl
 ARYA_LUNAR_DAY = ARYA_LUNAR_MONTH / 30
+
 
 # see lines 2402-2409 in calendrica-3.0.cl
 def is_old_hindu_lunar_leap_year(l_year):
@@ -2270,6 +2290,7 @@ def fixed_from_old_hindu_lunar(l_date):
 
 # see lines 2462-2466 in calendrica-3.0.cl
 ARYA_JOVIAN_PERIOD = 1577917500 / 364224
+
 
 # see lines 2468-2473 in calendrica-3.0.cl
 def jovian_year(date):
@@ -2338,6 +2359,7 @@ def bali_dasawara(b_date):
 
 # see lines 2523-2526 in calendrica-3.0.cl
 BALI_EPOCH = fixed_from_jd(146)
+
 
 # see lines 2528-2531 in calendrica-3.0.cl
 def bali_day_from_fixed(date):
@@ -2978,6 +3000,7 @@ MORNING = True
 # see lines 2970-2973 in calendrica-3.0.cl
 EVENING = False
 
+
 # see lines 2975-2984 in calendrica-3.0.cl
 def dawn(date, location, alpha):
     """Return standard time in morning on fixed date date at
@@ -3176,6 +3199,7 @@ def dynamical_from_universal(tee):
 # see lines 3111-3114 in calendrica-3.0.cl
 J2000 = days_from_hours(mpf(12)) + gregorian_new_year(2000)
 
+
 # see lines 3116-3126 in calendrica-3.0.cl
 def sidereal_from_moment(tee):
     """Return the mean sidereal time of day from moment tee expressed
@@ -3206,6 +3230,7 @@ MEAN_SIDEREAL_YEAR = mpf(365.25636)
 
 # see lines 93-97 in calendrica-3.0.errata.cl
 MEAN_SYNODIC_MONTH = mpf(29.530588861)
+
 
 # see lines 3140-3176 in calendrica-3.0.cl
 def ephemeris_correction(tee):
@@ -3534,6 +3559,7 @@ AUTUMN = deg(180)
 
 # see lines 3312-3315 in calendrica-3.0.cl
 WINTER = deg(270)
+
 
 # see lines 3317-3339 in calendrica-3.0.cl
 def precession(tee):
@@ -4745,6 +4771,7 @@ FULL = deg(180)
 # see lines 3645-3649 in calendrica-3.0.cl
 LAST_QUARTER = deg(270)
 
+
 # see lines 3651-3661 in calendrica-3.0.cl
 def lunar_phase_at_or_after(phi, tee):
     """Return the moment UT of the next time at or after moment, tee,
@@ -5192,6 +5219,7 @@ def phasis_on_or_before(date, location):
 # (Cairo, Egypt).
 ISLAMIC_LOCATION = location(deg(mpf(30.1)), deg(mpf(31.3)), mt(200), days_from_hours(2))
 
+
 # see lines 5868-5882 in calendrica-3.0.cl
 def fixed_from_observational_islamic(i_date):
     """Return fixed date equivalent to Observational Islamic date, i_date."""
@@ -5219,6 +5247,7 @@ def observational_islamic_from_fixed(date):
 # see lines 5898-5901 in calendrica-3.0.cl
 JERUSALEM = location(deg(mpf(31.8)), deg(mpf(35.2)), mt(800), days_from_hours(2))
 
+
 # see lines 5903-5918 in calendrica-3.0.cl
 def astronomical_easter(g_year):
     """Return date of (proposed) astronomical Easter in Gregorian
@@ -5237,6 +5266,7 @@ def astronomical_easter(g_year):
 
 # see lines 5920-5923 in calendrica-3.0.cl
 JAFFA = location(angle(32, 1, 60), angle(34, 45, 0), mt(0), days_from_hours(2))
+
 
 # see lines 5925-5938 in calendrica-3.0.cl
 def phasis_on_or_after(date, location):
@@ -5312,6 +5342,7 @@ PERSIAN_EPOCH = fixed_from_julian(julian_date(ce(622), MARCH, 19))
 TEHRAN = location(
     deg(mpf(35.68)), deg(mpf(51.42)), mt(1100), days_from_hours(3 + 1 / 2)
 )
+
 
 # see lines 3860-3865 in calendrica-3.0.cl
 def midday_in_tehran(date):
@@ -5471,6 +5502,7 @@ BAHAI_EPOCH = fixed_from_gregorian(gregorian_date(1844, MARCH, 21))
 
 # see lines 4050-4053 in calendrica-3.0.cl
 AYYAM_I_HA = 0
+
 
 # see lines 4055-4076 in calendrica-3.0.cl
 def fixed_from_bahai(b_date):
@@ -5646,6 +5678,7 @@ FRENCH_EPOCH = fixed_from_gregorian(gregorian_date(1792, SEPTEMBER, 22))
 
 # see lines 4228-4233 in calendrica-3.0.cl
 PARIS = location(angle(48, 50, 11), angle(2, 20, 15), mt(27), days_from_hours(1))
+
 
 # see lines 4235-4241 in calendrica-3.0.cl
 def midnight_in_paris(date):
@@ -5854,6 +5887,7 @@ def chinese_new_moon_on_or_after(date):
 # see lines 4446-4449 in calendrica-3.0.cl
 CHINESE_EPOCH = fixed_from_gregorian(gregorian_date(-2636, FEBRUARY, 15))
 
+
 # see lines 4451-4457 in calendrica-3.0.cl
 def is_chinese_no_major_solar_term(date):
     """Return True if Chinese lunar month starting on date, date,
@@ -6028,6 +6062,7 @@ def chinese_year_name(year):
 # see lines 4651-4655 in calendrica-3.0.cl
 CHINESE_MONTH_NAME_EPOCH = 57
 
+
 # see lines 4657-4664 in calendrica-3.0.cl
 # see lines 211-212 in calendrica-3.0.errata.cl
 def chinese_month_name(month, year):
@@ -6038,6 +6073,7 @@ def chinese_month_name(month, year):
 
 # see lines 4666-4669 in calendrica-3.0.cl
 CHINESE_DAY_NAME_EPOCH = rd(45)
+
 
 # see lines 4671-4675 in calendrica-3.0.cl
 # see lines 208-209 in calendrica-3.0.errata.cl
@@ -6246,6 +6282,7 @@ HINDU_SIDEREAL_YEAR = 365 + 279457 / 1080000
 # see lines 4880-4883 in calendrica-3.0.cl
 HINDU_CREATION = HINDU_EPOCH - 1955880000 * HINDU_SIDEREAL_YEAR
 
+
 # see lines 4885-4889 in calendrica-3.0.cl
 def hindu_mean_position(tee, period):
     """Return the position in degrees at moment, tee, in uniform circular
@@ -6264,6 +6301,7 @@ HINDU_ANOMALISTIC_YEAR = 1577917828000 / (4320000000 - 387)
 
 # see lines 4906-4909 in calendrica-3.0.cl
 HINDU_ANOMALISTIC_MONTH = mpf(1577917828) / (57753336 - 488199)
+
 
 # see lines 4911-4926 in calendrica-3.0.cl
 def hindu_true_position(tee, period, size, anomalistic, change):
@@ -6355,6 +6393,7 @@ def hindu_calendar_year(tee):
 # see lines 4998-5001 in calendrica-3.0.cl
 HINDU_SOLAR_ERA = 3179
 
+
 # see lines 5003-5020 in calendrica-3.0.cl
 def hindu_solar_from_fixed(date):
     """Return the Hindu (Orissa) solar date equivalent to fixed date, date."""
@@ -6387,6 +6426,7 @@ def fixed_from_hindu_solar(s_date):
 
 # see lines 5041-5044 in calendrica-3.0.cl
 HINDU_LUNAR_ERA = 3044
+
 
 # see lines 5046-5074 in calendrica-3.0.cl
 def hindu_lunar_from_fixed(date):
@@ -6529,6 +6569,7 @@ UJJAIN = location(
 # see lines 5213-5216 in calendrica-3.0.cl
 # see lines 217-218 in calendrica-3.0.errata.cl
 HINDU_LOCATION = UJJAIN
+
 
 # see lines 5218-5228 in calendrica-3.0.cl
 def hindu_sunrise(date):
@@ -6805,6 +6846,7 @@ SIDEREAL_START = precession(
     universal_from_local(mesha_samkranti(ce(285)), HINDU_LOCATION)
 )
 
+
 # see lines 5495-5513 in calendrica-3.0.cl
 def hindu_lunar_new_year(g_year):
     """Return the fixed date of Hindu lunisolar new year in
@@ -7041,6 +7083,7 @@ def tibetan_year(date):
 
 # see lines 5703-5705 in calendrica-3.0.cl
 TIBETAN_EPOCH = fixed_from_gregorian(gregorian_date(-127, DECEMBER, 7))
+
 
 # see lines 5707-5717 in calendrica-3.0.cl
 def tibetan_sun_equation(alpha):

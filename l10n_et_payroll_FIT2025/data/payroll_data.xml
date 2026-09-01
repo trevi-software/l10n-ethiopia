@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-
     <record id="register_FITA" model="hr.contribution.register">
         <field name="name">Federal Income Tax Withholding Register (1395/2017)</field>
         <field name="partner_id" eval="False" />
@@ -193,5 +192,4 @@
         <field name="category_id" ref="l10n_et_payroll_category.FITA" />
         <field name="sequence" eval="3136" />
     </record>
-
 </odoo>
