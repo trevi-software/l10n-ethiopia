@@ -72,12 +72,11 @@ class NewLabour(models.TransientModel):
                     )
                 )
             )
-            return {
-                "birth_date": fields.Date.to_string(
-                    date(year=dob[0], month=dob[1], day=dob[2])
-                )
-            }
-        return {"birth_date": False}
+            self.birth_date = fields.Date.to_string(
+                date(year=dob[0], month=dob[1], day=dob[2])
+            )
+        else:
+            self.birth_date = False
 
     def create_partner(self):
         res = super().create_partner()
