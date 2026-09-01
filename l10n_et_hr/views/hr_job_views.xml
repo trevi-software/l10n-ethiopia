@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="view_hr_job_form" model="ir.ui.view">
         <field name="name">hr.job.form.l10n_et_hr</field>
         <field name="model">hr.job</field>
@@ -8,7 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('oe_title')]" position="inside">
                 <label for="ethiopic_name" class="oe_edit_only" />
-                <h1><field name="ethiopic_name" placeholder="ሥም በአማርኛ ፊደል" /></h1>
+                <h1>
+                    <field name="ethiopic_name" placeholder="ሥም በአማርኛ ፊደል" />
+                </h1>
             </xpath>
         </field>
     </record>
@@ -47,5 +48,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
