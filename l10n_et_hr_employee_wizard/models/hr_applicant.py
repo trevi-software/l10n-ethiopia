@@ -2,6 +2,7 @@
 # Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from ast import literal_eval
 from datetime import date, datetime
 
 from odoo import api, fields, models
@@ -68,25 +69,29 @@ class HrApplicant(models.Model):
                     )
                 )
             )
-            return {
-                "birth_date": fields.Date.to_string(
-                    date(year=dob[0], month=dob[1], day=dob[2])
-                )
-            }
-        return {"birth_date": False}
+            self.birth_date = fields.Date.to_string(
+                date(year=dob[0], month=dob[1], day=dob[2])
+            )
+        else:
+            self.birth_date = False
 
     def create_employee_from_applicant(self):
         res = super().create_employee_from_applicant()
 
+        # Super returns an action dict whose 'context' is a stored string
+        # (usually '{}'); parse it, merge our defaults, and put it back.
+        context_str = res.get("context")
+        context = literal_eval(context_str) if isinstance(context_str, str) else {}
         for applicant in self:
-            vals = {
-                "default_certificate": applicant.education,
-                "default_ethiopic_name": applicant.ethiopic_name,
-                "default_use_ethiopic_dob": applicant.use_ethiopic_dob,
-                "default_etcal_dob_year": applicant.etcal_dob_year,
-                "default_etcal_dob_month": applicant.etcal_dob_month,
-                "default_etcal_dob_day": applicant.etcal_dob_day,
-            }
-            res["context"].update(vals)
-
+            context.update(
+                {
+                    "default_certificate": applicant.education,
+                    "default_ethiopic_name": applicant.ethiopic_name,
+                    "default_use_ethiopic_dob": applicant.use_ethiopic_dob,
+                    "default_etcal_dob_year": applicant.etcal_dob_year,
+                    "default_etcal_dob_month": applicant.etcal_dob_month,
+                    "default_etcal_dob_day": applicant.etcal_dob_day,
+                }
+            )
+        res["context"] = context
         return res

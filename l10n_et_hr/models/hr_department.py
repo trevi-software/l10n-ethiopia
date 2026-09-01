@@ -9,22 +9,16 @@ class HrDepartment(models.Model):
 
     ethiopic_name = fields.Char()
 
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         use_ethiopic_name = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("l10n_et_hr.use_ethiopic_department_name")
         )
-        if use_ethiopic_name and not self.env.context.get("hierarchical_naming", True):
-            for rec in self:
-                name = rec.name
-                if rec.ethiopic_name:
-                    name = rec.ethiopic_name
-                res.append((rec.id, name))
-            return res
-
-        return super().name_get()
+        if not use_ethiopic_name or self.env.context.get("hierarchical_naming"):
+            return super()._compute_display_name()
+        for rec in self:
+            rec.display_name = rec.ethiopic_name or rec.name
 
     @api.depends("name", "ethiopic_name", "parent_id.complete_name")
     def _compute_complete_name(self):
