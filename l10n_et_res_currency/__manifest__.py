@@ -5,7 +5,7 @@
 {
     "name": "Ethiopia Currency Denominations",
     "category": "Finance",
-    "author": "TREVI Software, Michael Telahun Makonnen",
+    "author": "TREVI Software, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "images": ["static/src/img/main_screenshot.png"],
