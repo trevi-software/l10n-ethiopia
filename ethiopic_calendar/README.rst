@@ -57,7 +57,6 @@ Authors
 -------
 
 * TREVI Software
-* Michael Telahun Makonnen
 
 Other credits
 -------------
