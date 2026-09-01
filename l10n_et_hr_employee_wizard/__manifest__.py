@@ -9,7 +9,7 @@
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
-    "author": "TREVI Software, Michael Telahun Makonnen",
+    "author": "TREVI Software, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-ethiopia",
     "depends": [
         "ethiopic_calendar",

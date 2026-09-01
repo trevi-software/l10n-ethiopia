@@ -19,6 +19,14 @@ exclude = ["setup/*"]
 [lint.per-file-ignores]
 "__init__.py" = ["F401", "I001"]  # ignore unused and unsorted imports in __init__.py
 "__manifest__.py" = ["B018"]  # useless expression
+# Vendored third-party library (calendrical algorithms) — keep as-is
+"ethiopic_calendar/models/pycalcal/pycalcal.py" = [
+    "E402",  # module-level import not at top of file (vendored file)
+    "E501",  # line too long (vendored file)
+    "E741",  # ambiguous variable name `l` (vendored file)
+    "F811",  # redefinition of unused name (vendored file)
+    "UP029",  # unnecessary builtin import (vendored file)
+]
 
 [lint.isort]
 section-order = ["future", "standard-library", "third-party", "odoo", "odoo-addons", "first-party", "local-folder"]

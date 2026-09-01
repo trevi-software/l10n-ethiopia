@@ -1,0 +1,6 @@
+# External Odoo addon dependencies not published in the OCA wheelhouse.
+# These come from trevi-software forks and are installed by pip in the
+# CI test workflow.
+odoo-addon-hr_employee_wizard @ git+https://github.com/trevi-software/trevi-hr.git@18.0#subdirectory=hr_employee_wizard
+odoo-addon-payroll_default_salary_rules @ git+https://github.com/trevi-software/trevi-payroll.git@18.0#subdirectory=payroll_default_salary_rules
+odoo-addon-res_currency_denomination @ git+https://github.com/trevi-software/trevi-payroll.git@18.0#subdirectory=res_currency_denomination

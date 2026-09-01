@@ -106,8 +106,7 @@ Here are the steps for buiding:
 
 3. generate the doc:
 
-   > $ make figures
->   $ make pycalcal.pdf
+   > $ make figures $ make pycalcal.pdf
 
 4. run the tests:
    > \$ make test
@@ -118,17 +117,17 @@ Here are the steps for buiding:
 order to use it you only need to have installed
 
 - a Python version greater or equal to 2.5.4 and lower than 3.0
-- [http://code.google.com/p/mpmath/ mpmath] package Then it is enough to place
-  `pycalcal.py` file in any place where python can load it, i.e. your current working
-  directory. You can find `pycalcal.py` in the distibution file listed in the
-  [http://code.google.com/p/pycalcal/downloads/list Download tab]. Alternatively you can
-  generate it from your own copy of the source distribution.
+- [http://code.google.com/p/mpmath/ mpmath] package Then it is enough to place `pycalcal.py`
+  file in any place where python can load it, i.e. your current working directory. You can
+  find `pycalcal.py` in the distibution file listed in the [http://code.google.com/p/pycalcal/downloads/list
+  Download
+  tab]. Alternatively you can generate it from your own copy of the source distribution.
 
 If you want to regenerate the full distribution from source you need the following
 additional tools:
 
 - [http://www.cs.tufts.edu/~nr/noweb/ noweb]
-- [http://nedbatchelder.com/code/coverage/ coverage] Should you have a problem ask via
-  the !PyCalCal google group.
+- [http://nedbatchelder.com/code/coverage/ coverage] Should you have a problem ask via the
+  !PyCalCal google group.
 
 = Try it on the web = [http://calendrica.appspot.com]
