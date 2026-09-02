@@ -17,3 +17,6 @@ odoo-addon-payroll_period_contract_values @ git+https://github.com/trevi-softwar
 odoo-addon-payroll_periods @ git+https://github.com/trevi-software/trevi-payroll.git@18.0#subdirectory=payroll_periods
 odoo-addon-payroll_policy_group @ git+https://github.com/trevi-software/trevi-payroll.git@18.0#subdirectory=payroll_policy_group
 odoo-addon-res_currency_denomination @ git+https://github.com/trevi-software/trevi-payroll.git@18.0#subdirectory=res_currency_denomination
+# pdfminer.six: silences an attachment_indexation WARNING that the CI
+# log check counts as an error.
+pdfminer.six
