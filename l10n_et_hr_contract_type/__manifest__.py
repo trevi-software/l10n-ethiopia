@@ -4,7 +4,7 @@
 {
     "name": "Contract Types - Ethiopia",
     "summary": "Ethiopian localization of Employee Contract Types",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localization",
     "license": "AGPL-3",
     "author": "TREVI Software, Odoo Community Association (OCA)",
