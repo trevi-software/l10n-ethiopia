@@ -7,7 +7,6 @@ import logging
 from pytz import UTC, timezone
 
 from odoo import api, fields, models
-from odoo.tools.translate import _
 
 from odoo.addons.ethiopic_calendar.models.ethiopic_calendar import (
     ET_MONTHS_SELECTION_AM,
@@ -205,7 +204,7 @@ class HrLeave(models.Model):
 
     @api.model
     def get_hrm(self):
-        hrm_data = ("", "", _("HR Manager"), "የሠው ሃይል አስተዳደር")
+        hrm_data = ("", "", self.env._("HR Manager"), "የሠው ሃይል አስተዳደር")
         hrm_id = self.env["ir.config_parameter"].sudo().get_param("hr.hr_manager_id")
         if hrm_id:
             hrm = self.env["hr.employee"].browse(hrm_id)
