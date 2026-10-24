@@ -3,7 +3,7 @@
 
 {
     "name": "Ethiopia - States and Provinces",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "TREVI Software, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/trevi-software/l10n-ethiopia",
