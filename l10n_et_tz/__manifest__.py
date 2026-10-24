@@ -5,7 +5,7 @@
 {
     "name": "Ethiopia - Timezone",
     "summary": "Set default timezone to Africa/Addis_Ababa",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software, Odoo Community Association (OCA)",
