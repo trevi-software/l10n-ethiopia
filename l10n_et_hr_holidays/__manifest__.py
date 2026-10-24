@@ -4,7 +4,7 @@
 {
     "name": "Leaves and Leave Types for Ethiopia",
     "summary": "Employeee Time Off Customization for Ethiopia",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
