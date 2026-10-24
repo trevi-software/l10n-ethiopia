@@ -6,8 +6,6 @@ from datetime import date, datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _
-
 from .pycalcal import pycalcal as pcc
 
 ET_MONTHS_AM = [
@@ -61,19 +59,19 @@ ET_MONTHS_SELECTION_AM = [
 ]
 
 ET_MONTHS_SELECTION = [
-    ("1", _("Meskerem")),
-    ("2", _("Tikimt")),
-    ("3", _("Hedar")),
-    ("4", _("Tahsas")),
-    ("5", _("Tir")),
-    ("6", _("Yekatit")),
-    ("7", _("Megabit")),
-    ("8", _("Miazia")),
-    ("9", _("Genbot")),
-    ("10", _("Senie")),
-    ("11", _("Hamle")),
-    ("12", _("Nehassie")),
-    ("13", _("Pagume")),
+    ("1", "Meskerem"),
+    ("2", "Tikimt"),
+    ("3", "Hedar"),
+    ("4", "Tahsas"),
+    ("5", "Tir"),
+    ("6", "Yekatit"),
+    ("7", "Megabit"),
+    ("8", "Miazia"),
+    ("9", "Genbot"),
+    ("10", "Senie"),
+    ("11", "Hamle"),
+    ("12", "Nehassie"),
+    ("13", "Pagume"),
 ]
 
 ET_DAYOFMONTH_SELECTION = [
@@ -138,7 +136,7 @@ def get_etyear_selection(start_delta=-20, end_delta=100):
 def ethiopic_date_str(et_date):
     """Returns an ethiopic_date as a string (Y-m-d)"""
 
-    return str(et_date[0]) + "-%02d" % (et_date[1]) + "-%02d" % (et_date[2])
+    return f"{et_date[0]}-{et_date[1]:02d}-{et_date[2]:02d}"
 
 
 def date_gregorian_from_ethiopic_base(y, m, d):
