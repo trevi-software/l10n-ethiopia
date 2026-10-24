@@ -7,7 +7,6 @@
     "summary": "Date calculations in the Ethiopian calendar",
     "version": "19.0.1.0.0",
     "category": "Localization",
-    "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software, Odoo Community Association (OCA)",
     "website": "https://github.com/trevi-software/l10n-ethiopia",
