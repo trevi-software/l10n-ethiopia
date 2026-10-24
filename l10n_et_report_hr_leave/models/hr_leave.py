@@ -74,12 +74,21 @@ class HrLeave(models.Model):
         for record in self:
             record.rest_days = 0
 
+    @api.depends("date_from", "date_to")
     def _compute_public_holiday_days(self):
         for record in self:
+            if not record.date_from or not record.date_to:
+                record.public_holiday_days = 0
+                continue
+            # date_from/date_to are datetimes while the holiday's date is a date:
+            # compare calendar days so a holiday falling on the last day of the
+            # leave is counted too (it used to be excluded by the '<').
+            date_from = fields.Datetime.to_datetime(record.date_from).date()
+            date_to = fields.Datetime.to_datetime(record.date_to).date()
             public_holidays = self.env["calendar.public.holiday.line"].search(
                 [
-                    ("date", ">=", record.date_from),
-                    ("date", "<", record.date_to),
+                    ("date", ">=", date_from),
+                    ("date", "<=", date_to),
                 ]
             )
             record.public_holiday_days = len(public_holidays)
