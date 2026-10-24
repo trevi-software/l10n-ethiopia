@@ -37,23 +37,31 @@ class HrEmployee(models.Model):
 
         return res
 
-    certificate = fields.Selection(
-        selection=[
-            # Values taken over from hr's 'certificate' field (19.0 exposes it
-            # through a method, so selection_add raises an AssertionError).
-            ("graduate", "Secondary School"),
+    @api.model
+    def _get_certificate_selection(self):
+        """Extend core's certificate selection with the Ethiopian school levels.
+
+        Odoo 19 exposes ``certificate`` through this method instead of a static
+        list (so ``selection_add`` raises an AssertionError), which also means the
+        field itself stays core's: the core values keep their keys and only get the
+        Ethiopian labels, and the extra levels are appended here.
+        """
+        labels = {
+            "graduate": "Secondary School",
+            "bachelor": "Batchelor (BA)",
+            "master": "Master (MA)",
+            "doctor": "Doctorate",
+        }
+        selection = [
+            (value, labels.get(value, label))
+            for value, label in super()._get_certificate_selection()
+        ]
+        return selection + [
             ("diploma", "Diploma"),
-            ("bachelor", "Batchelor (BA)"),
-            ("master", "Master (MA)"),
-            ("doctor", "Doctorate"),
-            ("other", "Other"),
             ("none", "No Formal Education"),
             ("primary", "Primary School"),
-        ],
-        string="Certificate Level",
-        groups="hr.group_hr_user",
-        tracking=True,
-    )
+        ]
+
     ethiopic_name = fields.Char()
     use_ethiopic_dob = fields.Boolean("Use Ethiopic Birthday")
     etcal_dob_month = fields.Selection(
@@ -78,7 +86,9 @@ class HrEmployee(models.Model):
         for rec in self:
             rec.display_name = rec.ethiopic_name or rec.name
 
-    @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
+    @api.onchange(
+        "etcal_dob_day", "etcal_dob_month", "etcal_dob_year", "use_ethiopic_dob"
+    )
     def onchange_etdob(self):
         for rec in self:
             if rec.etcal_dob_day and rec.etcal_dob_month and rec.etcal_dob_year:
@@ -94,5 +104,21 @@ class HrEmployee(models.Model):
                 rec.birthday = fields.Date.to_string(
                     date(year=dob[0], month=dob[1], day=dob[2])
                 )
-            else:
-                rec.birthday = False
+            elif (
+                rec.use_ethiopic_dob
+                and rec.birthday
+                and not (rec.etcal_dob_day or rec.etcal_dob_month or rec.etcal_dob_year)
+            ):
+                # Switching to Ethiopic entry with the three parts still empty:
+                # seed them from the Gregorian birthday already on the record.
+                birthday = fields.Date.to_date(rec.birthday)
+                ethiopic = pcc.ethiopic_from_fixed(
+                    pcc.fixed_from_gregorian(
+                        pcc.gregorian_date(birthday.year, birthday.month, birthday.day)
+                    )
+                )
+                rec.etcal_dob_year = str(ethiopic[0])
+                rec.etcal_dob_month = str(ethiopic[1])
+                rec.etcal_dob_day = str(ethiopic[2])
+            # A partial Ethiopic entry leaves the stored birthday alone: erasing it
+            # here would lose the Gregorian date as soon as the fields are cleared.

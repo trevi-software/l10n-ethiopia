@@ -3,6 +3,7 @@
 
 from datetime import date
 
+from odoo import fields
 from odoo.tests import Form, TransactionCase
 
 
@@ -73,6 +74,32 @@ class RecruitmentTestCase(TransactionCase):
             f.birthday,
             date(2007, 9, 12),
             "When the ethiopic dob was set the 'birthday' field was modified",
+        )
+
+    def test_onchange_dob_seeds_ethiopic_from_birthday(self):
+        """Turning the Ethiopic entry on fills the three parts from the birthday."""
+        self.ee.birthday = date(1990, 1, 1)
+
+        f = Form(self.ee)
+        f.use_ethiopic_dob = True
+
+        self.assertEqual(f.etcal_dob_year, "1982")
+        self.assertEqual(f.etcal_dob_month, "4")
+        self.assertEqual(f.etcal_dob_day, "23")
+
+    def test_onchange_dob_keeps_birthday_when_incomplete(self):
+        """An incomplete Ethiopic entry must not erase the stored birthday."""
+        self.ee.birthday = date(1990, 1, 1)
+
+        f = Form(self.ee)
+        f.use_ethiopic_dob = True
+        # Clearing one of the three parts makes the entry incomplete again.
+        f.etcal_dob_day = False
+
+        self.assertEqual(
+            fields.Date.to_date(f.birthday),
+            date(1990, 1, 1),
+            "An incomplete ethiopic date must keep the birthday that was stored",
         )
 
     def test_department_name_get(self):
