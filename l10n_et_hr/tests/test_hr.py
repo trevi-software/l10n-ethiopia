@@ -3,7 +3,7 @@
 
 from datetime import date
 
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, TransactionCase
 
 
 class RecruitmentTestCase(TransactionCase):

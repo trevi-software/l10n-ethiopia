@@ -38,16 +38,21 @@ class HrEmployee(models.Model):
         return res
 
     certificate = fields.Selection(
-        selection_add=[
-            ("none", "No Formal Education"),
-            ("primary", "Primary School"),
+        selection=[
+            # Values taken over from hr's 'certificate' field (19.0 exposes it
+            # through a method, so selection_add raises an AssertionError).
             ("graduate", "Secondary School"),
             ("diploma", "Diploma"),
             ("bachelor", "Batchelor (BA)"),
             ("master", "Master (MA)"),
             ("doctor", "Doctorate"),
             ("other", "Other"),
+            ("none", "No Formal Education"),
+            ("primary", "Primary School"),
         ],
+        string="Certificate Level",
+        groups="hr.group_hr_user",
+        tracking=True,
     )
     ethiopic_name = fields.Char()
     use_ethiopic_dob = fields.Boolean("Use Ethiopic Birthday")
@@ -60,6 +65,18 @@ class HrEmployee(models.Model):
     etcal_dob_year = fields.Selection(
         _get_year, "Year", groups="hr.group_hr_user", tracking=True
     )
+
+    def _compute_display_name(self):
+        # 'hr.employee.base' no longer exists in 19.0, this used to live there.
+        use_ethiopic_name = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("l10n_et_hr.use_ethiopic_employee_name")
+        )
+        if not use_ethiopic_name:
+            return super()._compute_display_name()
+        for rec in self:
+            rec.display_name = rec.ethiopic_name or rec.name
 
     @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
     def onchange_etdob(self):
