@@ -39,10 +39,7 @@
     </record>
     <record model="ir.ui.menu" id="hr_payroll_structure_type_menu">
         <field name="name">Salary Structure Types</field>
-        <field
-            name="parent_id"
-            ref="hr_contract.menu_human_resources_configuration_contract"
-        />
+        <field name="parent_id" ref="hr.menu_human_resources_configuration" />
         <field name="action" ref="hr_payroll_structure_type_act_window" />
         <field name="sequence" eval="16" />
     </record>

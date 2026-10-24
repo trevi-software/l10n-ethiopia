@@ -4,14 +4,14 @@
 {
     "name": "Salary Structure Types - Ethiopia",
     "summary": "Ethiopian localization of Employee Salary Structure Types",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",
     "author": "TREVI Software, Odoo Community Association (OCA)",
     "website": "https://github.com/trevi-software/l10n-ethiopia",
     "depends": [
-        "hr_contract",
+        "hr",
     ],
     "data": [
         "data/hr_contract_data.xml",
