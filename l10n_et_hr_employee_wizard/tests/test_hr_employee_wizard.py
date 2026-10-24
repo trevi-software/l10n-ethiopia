@@ -16,6 +16,20 @@ class TestHrEmployeeWizard(TransactionCase):
         cls.Department = cls.env["hr.department"]
         cls.Currency = cls.env["res.currency"]
         cls.Wizard = cls.env["hr.employee.wizard.new"]
+        # The Ethiopic year selection is derived from today's date and only offers
+        # adult birth years, so pick a year it really offers instead of a hardcoded
+        # one that the range drifts out of.
+        cls.applicant_year = cls._valid_ethiopic_year(cls.Applicant, "etcal_dob_year")
+        cls.wizard_year = cls._valid_ethiopic_year(cls.Wizard, "etcal_dob_year")
+
+    @staticmethod
+    def _valid_ethiopic_year(model, field_name):
+        """Return one of the years the Ethiopic year selection currently offers."""
+        field = model._fields[field_name]
+        selection = (
+            field.selection(model) if callable(field.selection) else field.selection
+        )
+        return selection[0][0]
 
     def test_ethiopian_fields_on_applicant(self):
         """Test that Ethiopian-specific fields exist on hr.applicant."""
@@ -29,21 +43,21 @@ class TestHrEmployeeWizard(TransactionCase):
                 "use_ethiopic_dob": True,
                 "etcal_dob_day": "5",
                 "etcal_dob_month": "8",
-                "etcal_dob_year": "2009",
+                "etcal_dob_year": self.applicant_year,
             }
         )
         self.assertEqual(applicant.ethiopic_name, "ተስተዋል ማክበሻ")
         self.assertTrue(applicant.use_ethiopic_dob)
         self.assertEqual(applicant.etcal_dob_day, "5")
         self.assertEqual(applicant.etcal_dob_month, "8")
-        self.assertEqual(applicant.etcal_dob_year, "2009")
+        self.assertEqual(applicant.etcal_dob_year, self.applicant_year)
 
     def test_ethiopic_dob_onchange(self):
         """Test Ethiopian calendar DOB onchange."""
         applicant = self.Applicant.new({"partner_name": "Test Applicant"})
         applicant.etcal_dob_day = "5"
         applicant.etcal_dob_month = "8"
-        applicant.etcal_dob_year = "2009"
+        applicant.etcal_dob_year = self.applicant_year
         applicant.onchange_etdob()
         # The onchange should set birth_date to the Gregorian equivalent
         self.assertTrue(applicant.birth_date)
@@ -58,7 +72,7 @@ class TestHrEmployeeWizard(TransactionCase):
                 "use_ethiopic_dob": True,
                 "etcal_dob_day": "5",
                 "etcal_dob_month": "8",
-                "etcal_dob_year": "2009",
+                "etcal_dob_year": self.wizard_year,
                 "house_no": "B-123",
                 "kebele": "01",
                 "woreda": "Bole Subcity",
@@ -80,7 +94,7 @@ class TestHrEmployeeWizard(TransactionCase):
         )
         wizard.etcal_dob_day = "5"
         wizard.etcal_dob_month = "8"
-        wizard.etcal_dob_year = "2009"
+        wizard.etcal_dob_year = self.wizard_year
         wizard.onchange_etdob()
         self.assertTrue(wizard.birth_date)
 
