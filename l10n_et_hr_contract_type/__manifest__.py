@@ -8,7 +8,7 @@
     "category": "Localization",
     "license": "AGPL-3",
     "author": "TREVI Software, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/l10n-ethiopia",
+    "website": "https://github.com/trevi-software/l10n-ethiopia",
     "depends": [
         "hr",
     ],
