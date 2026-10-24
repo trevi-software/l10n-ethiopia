@@ -9,11 +9,15 @@
 odoo-addon-hr_benefit @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_benefit
 odoo-addon-hr_contract_status @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_contract_status
 odoo-addon-hr_contract_values @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_contract_values
-odoo-addon-hr_contract_values_payroll @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_contract_values_payroll
+# odoo-addon-hr_contract_values_payroll and odoo-addon-hr_employee_wizard are deliberately NOT
+# listed yet: trevi-hr@19.0 does not carry those subdirectories, and pip then aborts the whole
+# install with "does not appear to be a Python project: neither 'setup.py' nor 'pyproject.toml'
+# found", which reddens the test job of every PR in this repo (the CI installs this file
+# wholesale). Re-add both, plus the manifest dependency of l10n_et_hr_employee_wizard, when the
+# trevi-hr 19.0 migration lands them.
 odoo-addon-hr_contract_values_resource_schedule @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_contract_values_resource_schedule
 odoo-addon-hr_employee_seniority_months @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_employee_seniority_months
 odoo-addon-hr_employee_status @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_employee_status
-odoo-addon-hr_employee_wizard @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=hr_employee_wizard
 odoo-addon-resource_schedule @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=resource_schedule
 odoo-addon-trevi_hr_job_categories @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=trevi_hr_job_categories
 odoo-addon-trevi_hr_usability @ git+https://github.com/trevi-software/trevi-hr.git@19.0#subdirectory=trevi_hr_usability
