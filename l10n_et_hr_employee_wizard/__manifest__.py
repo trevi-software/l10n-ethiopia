@@ -5,7 +5,7 @@
 {
     "name": "New Employee Wizard - Ethiopia",
     "summary": "Ethiopian localization of new employee wizard",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localization",
     "images": ["static/src/img/main_screenshot.png"],
     "license": "AGPL-3",

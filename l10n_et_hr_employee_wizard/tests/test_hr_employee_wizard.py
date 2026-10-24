@@ -12,7 +12,6 @@ class TestHrEmployeeWizard(TransactionCase):
         cls.Company = cls.env["res.company"]
         cls.Employee = cls.env["hr.employee"]
         cls.Applicant = cls.env["hr.applicant"]
-        cls.Candidate = cls.env["hr.candidate"]
         cls.Job = cls.env["hr.job"]
         cls.Department = cls.env["hr.department"]
         cls.Currency = cls.env["res.currency"]
@@ -20,10 +19,11 @@ class TestHrEmployeeWizard(TransactionCase):
 
     def test_ethiopian_fields_on_applicant(self):
         """Test that Ethiopian-specific fields exist on hr.applicant."""
-        candidate = self.Candidate.create({"partner_name": "Test Applicant"})
         applicant = self.Applicant.create(
             {
-                "candidate_id": candidate.id,
+                # Odoo 19 merged hr.candidate into hr.applicant: the applicant
+                # itself now carries the personal data (partner_name, ...).
+                "partner_name": "Test Applicant",
                 # Ethiopia-specific fields
                 "ethiopic_name": "ተስተዋል ማክበሻ",
                 "use_ethiopic_dob": True,
@@ -40,8 +40,7 @@ class TestHrEmployeeWizard(TransactionCase):
 
     def test_ethiopic_dob_onchange(self):
         """Test Ethiopian calendar DOB onchange."""
-        candidate = self.Candidate.create({"partner_name": "Test Applicant"})
-        applicant = self.Applicant.new({"candidate_id": candidate.id})
+        applicant = self.Applicant.new({"partner_name": "Test Applicant"})
         applicant.etcal_dob_day = "5"
         applicant.etcal_dob_month = "8"
         applicant.etcal_dob_year = "2009"
@@ -87,10 +86,9 @@ class TestHrEmployeeWizard(TransactionCase):
 
     def test_applicant_to_employee_creation(self):
         """Test creating employee from applicant with Ethiopian data."""
-        candidate = self.Candidate.create({"partner_name": "Test Applicant"})
         applicant = self.Applicant.create(
             {
-                "candidate_id": candidate.id,
+                "partner_name": "Test Applicant",
                 "email_from": "test@example.com",
                 "ethiopic_name": "ተስተዋል ማክበሻ",
             }
