@@ -1,0 +1,29 @@
+<odoo noupdate="0">
+    <!-- Odoo 18 base ships Ethiopian states (AA, AF, AM, BN, DR, GM, HR,
+    OR, SM, SP, TG).  We fix Dire Dawa's code (base uses DR; DD is the
+    correct abbreviation) and add the regions created since the initial
+    import (Sidama, South Ethiopia, South West Ethiopia, Central Ethiopia). -->
+    <record id="base.state_et_5" model="res.country.state">
+        <field name="code">DD</field>
+    </record>
+    <record id="state_et_12" model="res.country.state">
+        <field name="country_id" ref="base.et" />
+        <field name="code">SD</field>
+        <field name="name">Sidama</field>
+    </record>
+    <record id="state_et_13" model="res.country.state">
+        <field name="country_id" ref="base.et" />
+        <field name="code">SE</field>
+        <field name="name">South Ethiopia Peoples</field>
+    </record>
+    <record id="state_et_14" model="res.country.state">
+        <field name="country_id" ref="base.et" />
+        <field name="code">SW</field>
+        <field name="name">South West Ethiopia Peoples</field>
+    </record>
+    <record id="state_et_15" model="res.country.state">
+        <field name="country_id" ref="base.et" />
+        <field name="code">CE</field>
+        <field name="name">Central Ethiopia Peoples</field>
+    </record>
+</odoo>
