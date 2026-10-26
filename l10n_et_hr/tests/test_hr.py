@@ -6,6 +6,8 @@ from datetime import date
 from odoo import fields
 from odoo.tests import Form, TransactionCase
 
+from odoo.addons.ethiopic_calendar.models.pycalcal import pycalcal as pcc
+
 
 class RecruitmentTestCase(TransactionCase):
     def setUp(self):
@@ -101,6 +103,50 @@ class RecruitmentTestCase(TransactionCase):
             date(1990, 1, 1),
             "An incomplete ethiopic date must keep the birthday that was stored",
         )
+
+    def test_onchange_dob_round_trip_keeps_corrected_birthday(self):
+        """Turning the ethiopic entry back on must not undo a corrected birthday."""
+        self.ee.birthday = date(1990, 1, 1)
+
+        f = Form(self.ee)
+        f.use_ethiopic_dob = True
+        # The three parts are filled in now, the entry is turned off and the
+        # Gregorian birthday is corrected while it is off.
+        f.use_ethiopic_dob = False
+        f.birthday = date(1991, 5, 6)
+        f.use_ethiopic_dob = True
+
+        self.assertEqual(
+            fields.Date.to_date(f.birthday),
+            date(1991, 5, 6),
+            "Turning the ethiopic entry back on must keep the corrected birthday",
+        )
+        self.assertEqual(
+            (f.etcal_dob_year, f.etcal_dob_month, f.etcal_dob_day),
+            self._ethiopic_parts(date(1991, 5, 6)),
+            "The ethiopic parts must describe the corrected birthday",
+        )
+
+    def test_onchange_dob_seeds_an_old_birthday(self):
+        """A birthday older than the previous 59-year window can still switch."""
+        self.ee.birthday = date(1940, 3, 1)
+
+        f = Form(self.ee)
+        f.use_ethiopic_dob = True
+
+        self.assertEqual(
+            (f.etcal_dob_year, f.etcal_dob_month, f.etcal_dob_day),
+            self._ethiopic_parts(date(1940, 3, 1)),
+            "An employee born in 1940 must get his ethiopic birthday filled in",
+        )
+
+    def _ethiopic_parts(self, gregorian):
+        ethiopic = pcc.ethiopic_from_fixed(
+            pcc.fixed_from_gregorian(
+                pcc.gregorian_date(gregorian.year, gregorian.month, gregorian.day)
+            )
+        )
+        return (str(ethiopic[0]), str(ethiopic[1]), str(ethiopic[2]))
 
     def test_department_name_get(self):
         use_ethiopic_name = self.env["ir.config_parameter"].get_param(

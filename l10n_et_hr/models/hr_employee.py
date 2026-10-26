@@ -20,7 +20,10 @@ class HrEmployee(models.Model):
     def _get_year(self):
         res = []
 
-        # Assuming employees are at least 16 years old
+        # Employees are assumed to be at least 16 years old, and the range reaches
+        # back 100 years so that a birthday of anyone alive today has a matching
+        # choice: the previous 59-year window could not represent, say, 1940, and
+        # converting such a birthday to the Ethiopic calendar then failed.
         year = datetime.now().year
         year -= 16
 
@@ -31,7 +34,7 @@ class HrEmployee(models.Model):
         year = pccDate[0]
 
         i = year
-        while i > (year - 59):
+        while i > (year - 100):
             res.append((str(i), str(i)))
             i -= 1
 
@@ -86,10 +89,9 @@ class HrEmployee(models.Model):
         for rec in self:
             rec.display_name = rec.ethiopic_name or rec.name
 
-    @api.onchange(
-        "etcal_dob_day", "etcal_dob_month", "etcal_dob_year", "use_ethiopic_dob"
-    )
+    @api.onchange("etcal_dob_day", "etcal_dob_month", "etcal_dob_year")
     def onchange_etdob(self):
+        """Fill the Gregorian birthday from a complete Ethiopic entry."""
         for rec in self:
             if rec.etcal_dob_day and rec.etcal_dob_month and rec.etcal_dob_year:
                 dob = pcc.gregorian_from_fixed(
@@ -104,21 +106,27 @@ class HrEmployee(models.Model):
                 rec.birthday = fields.Date.to_string(
                     date(year=dob[0], month=dob[1], day=dob[2])
                 )
-            elif (
-                rec.use_ethiopic_dob
-                and rec.birthday
-                and not (rec.etcal_dob_day or rec.etcal_dob_month or rec.etcal_dob_year)
-            ):
-                # Switching to Ethiopic entry with the three parts still empty:
-                # seed them from the Gregorian birthday already on the record.
-                birthday = fields.Date.to_date(rec.birthday)
-                ethiopic = pcc.ethiopic_from_fixed(
-                    pcc.fixed_from_gregorian(
-                        pcc.gregorian_date(birthday.year, birthday.month, birthday.day)
-                    )
-                )
-                rec.etcal_dob_year = str(ethiopic[0])
-                rec.etcal_dob_month = str(ethiopic[1])
-                rec.etcal_dob_day = str(ethiopic[2])
             # A partial Ethiopic entry leaves the stored birthday alone: erasing it
             # here would lose the Gregorian date as soon as the fields are cleared.
+
+    @api.onchange("use_ethiopic_dob")
+    def onchange_use_ethiopic_dob(self):
+        """Fill the Ethiopic parts from the current birthday when switching.
+
+        The three parts are only ever converted Ethiopic -> Gregorian, so turning
+        the entry on must not feed the parts that are already on the record back
+        into the conversion: a birthday corrected while the entry was off would be
+        overwritten with the stale Ethiopic date.
+        """
+        for rec in self:
+            birthday = fields.Date.to_date(rec.birthday)
+            if not rec.use_ethiopic_dob or not birthday:
+                continue
+            ethiopic = pcc.ethiopic_from_fixed(
+                pcc.fixed_from_gregorian(
+                    pcc.gregorian_date(birthday.year, birthday.month, birthday.day)
+                )
+            )
+            rec.etcal_dob_year = str(ethiopic[0])
+            rec.etcal_dob_month = str(ethiopic[1])
+            rec.etcal_dob_day = str(ethiopic[2])
