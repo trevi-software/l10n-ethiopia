@@ -15,6 +15,7 @@
         "hr_holidays",
         "calendar_public_holiday",
         "ethiopic_calendar",
+        "l10n_et_hr",
         "report_py3o",
     ],
     "data": [

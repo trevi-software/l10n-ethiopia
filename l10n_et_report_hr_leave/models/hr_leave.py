@@ -74,21 +74,33 @@ class HrLeave(models.Model):
         for record in self:
             record.rest_days = 0
 
-    @api.depends("date_from", "date_to")
+    def _as_local_datetime(self, value):
+        """``value``, a naive UTC datetime, in the employee's own time zone."""
+        if not value:
+            return False
+        return (
+            UTC.localize(value)
+            .astimezone(timezone(self.employee_id.tz or "UTC"))
+            .replace(tzinfo=None)
+        )
+
+    @api.depends("date_from", "date_to", "employee_id")
     def _compute_public_holiday_days(self):
         for record in self:
-            if not record.date_from or not record.date_to:
+            # date_from/date_to are datetimes in UTC while a holiday's date is a
+            # calendar date in the employee's time zone: an 08:00 start in UTC+14
+            # falls on the previous UTC date, so compare the employee's own dates
+            # (a holiday sitting on the day before the request must not be counted,
+            # and one on the last requested day must be).
+            date_from = record._as_local_datetime(record.date_from)
+            date_to = record._as_local_datetime(record.date_to)
+            if not date_from or not date_to:
                 record.public_holiday_days = 0
                 continue
-            # date_from/date_to are datetimes while the holiday's date is a date:
-            # compare calendar days so a holiday falling on the last day of the
-            # leave is counted too (it used to be excluded by the '<').
-            date_from = fields.Datetime.to_datetime(record.date_from).date()
-            date_to = fields.Datetime.to_datetime(record.date_to).date()
             public_holidays = self.env["calendar.public.holiday.line"].search(
                 [
-                    ("date", ">=", date_from),
-                    ("date", "<=", date_to),
+                    ("date", ">=", date_from.date()),
+                    ("date", "<=", date_to.date()),
                 ]
             )
             record.public_holiday_days = len(public_holidays)
@@ -113,20 +125,57 @@ class HrLeave(models.Model):
             )
             record.taken_leave_days = sum(taken_leaves.mapped("number_of_days"))
 
-    @api.depends("number_of_days", "taken_leave_days")
+    def _balance_date(self):
+        """Date the balance is looked at: the leave's start, or today."""
+        self.ensure_one()
+        local_start = self._as_local_datetime(self.date_from)
+        if local_start:
+            return local_start.date()
+        return fields.Date.context_today(self)
+
+    def _allocation_balance(self, target_date):
+        """What the employee still has for this leave type at ``target_date``.
+
+        Odoo's own date-aware calculation is reused (the one behind the time off
+        dashboard): an allocation only counts for the period it is valid in, and
+        only for what it still has left, so expired allocations and ones that have
+        not started yet do not inflate the balance.
+
+        The request itself is ignored, so the figures answer "what can this
+        employee still take" rather than counting this request as already taken.
+        """
+        self.ensure_one()
+        balance = {"remaining": 0.0, "taken": 0.0}
+        if not self.employee_id or not self.holiday_status_id:
+            return balance
+        per_allocation, _extra = self.employee_id.with_context(
+            ignored_leave_ids=self.ids
+        )._get_consumed_leaves(self.holiday_status_id, target_date)
+        allocation_data = (
+            (per_allocation or {})
+            .get(self.employee_id, {})
+            .get(self.holiday_status_id, {})
+        )
+        for allocation, data in allocation_data.items():
+            if allocation:
+                # the same validity rule core applies to this very data
+                if allocation.date_from > target_date:
+                    continue
+                if allocation.date_to and allocation.date_to < target_date:
+                    continue
+            remaining = data.get("remaining_leaves", 0.0)
+            balance["remaining"] += remaining
+            balance["taken"] += data.get("max_leaves", 0.0) - remaining
+        return balance
+
+    @api.depends(
+        "number_of_days", "date_from", "date_to", "employee_id", "holiday_status_id"
+    )
     def _compute_available_leave_days(self):
-        allocation = self.env["hr.leave.allocation"]
         for record in self:
-            my_allocations = allocation.search(
-                [
-                    ("employee_id", "=", record.employee_id.id),
-                    ("holiday_status_id", "=", record.holiday_status_id.id),
-                    ("state", "=", "validate"),
-                ]
-            )
-            record.available_leave_days = (
-                sum(my_allocations.mapped("number_of_days")) - record.taken_leave_days
-            )
+            record.available_leave_days = record._allocation_balance(
+                record._balance_date()
+            )["remaining"]
 
     @api.model
     def time2ethiopic(self, year, month, day):
@@ -171,45 +220,25 @@ class HrLeave(models.Model):
 
     @api.model
     def get_remaining_leaves(self, leave):
-        obj = self.env["hr.leave.type"]
-        res = obj._get_remaining_leaves(leave.employee_id.id)
-        res = res[leave.employee_id.id]
-        if (
-            res[leave.holiday_status_id.id].get("max_leaves", False)
-            and res[leave.holiday_status_id.id]["max_leaves"] > 0
-        ):
-            days = res[leave.holiday_status_id.id]["remaining_leaves"]
-            if leave.state not in ["validate", "validate1"]:
-                days = (
-                    res[leave.holiday_status_id.id]["remaining_leaves"]
-                    - leave.number_of_days_display
-                )
-        else:
-            days = ""
+        """Days the employee can still take, or '' for a type without allocation.
 
-        return days
+        Reported for the day the request starts on, and computed with the same
+        date-aware balance the rest of this module uses.
+        """
+        if not leave.holiday_status_id.requires_allocation:
+            return ""
+        return leave._allocation_balance(leave._balance_date())["remaining"]
 
     @api.model
     def get_taken_leaves(self, leave):
-        obj = self.env["hr.leave.type"]
-        res = obj._get_remaining_leaves(leave.employee_id.id)
-        res = res[leave.employee_id.id]
-        if (
-            res[leave.holiday_status_id.id].get("max_leaves", False)
-            and res[leave.holiday_status_id.id]["max_leaves"] > 0
-        ):
-            days = (
-                res[leave.holiday_status_id.id]["max_leaves"]
-                - res[leave.holiday_status_id.id]["remaining_leaves"]
-            )
+        """Days already taken for this type, excluding this request itself.
 
-            # We only want leaves taken so far, *EXCLUDING* this one
-            if leave.state in ["validate", "validate1"]:
-                days -= leave.number_of_days_display
-        else:
-            days = ""
-
-        return days
+        Returns '' for a type that needs no allocation (the report prints a blank
+        in that case).
+        """
+        if not leave.holiday_status_id.requires_allocation:
+            return ""
+        return leave._allocation_balance(leave._balance_date())["taken"]
 
     @api.model
     def get_hrm(self):
@@ -226,23 +255,8 @@ class HrLeave(models.Model):
 
         return hrm_data
 
-    @api.depends("date_from", "date_to")
+    @api.depends("date_from", "date_to", "employee_id")
     def _compute_local_date_from_to(self):
         for record in self:
-            if record.date_from:
-                record.local_date_from = (
-                    UTC.localize(record.date_from)
-                    .astimezone(timezone(record.employee_id.tz or "UTC"))
-                    .replace(tzinfo=None)
-                )
-
-            else:
-                record.local_date_from = False
-            if record.date_to:
-                record.local_date_to = (
-                    UTC.localize(record.date_to)
-                    .astimezone(timezone(record.employee_id.tz or "UTC"))
-                    .replace(tzinfo=None)
-                )
-            else:
-                record.local_date_to = False
+            record.local_date_from = record._as_local_datetime(record.date_from)
+            record.local_date_to = record._as_local_datetime(record.date_to)
