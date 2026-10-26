@@ -127,6 +127,28 @@ class RecruitmentTestCase(TransactionCase):
             "The ethiopic parts must describe the corrected birthday",
         )
 
+    def test_onchange_dob_clears_parts_when_birthday_is_cleared(self):
+        """Clearing the birthday must not leave the old Ethiopic parts behind."""
+        self.ee.birthday = date(1990, 1, 1)
+
+        f = Form(self.ee)
+        f.use_ethiopic_dob = True
+        # The three parts are filled in now; turn the entry off and clear the
+        # Gregorian birthday, then turn the entry back on.
+        f.use_ethiopic_dob = False
+        f.birthday = False
+        f.use_ethiopic_dob = True
+
+        self.assertEqual(
+            (f.etcal_dob_year, f.etcal_dob_month, f.etcal_dob_day),
+            (False, False, False),
+            "Clearing the birthday must clear the stale ethiopic parts",
+        )
+        self.assertFalse(
+            fields.Date.to_date(f.birthday),
+            "The birthday must stay empty when it was cleared",
+        )
+
     def test_onchange_dob_seeds_an_old_birthday(self):
         """A birthday older than the previous 59-year window can still switch."""
         self.ee.birthday = date(1940, 3, 1)

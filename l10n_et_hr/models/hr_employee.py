@@ -120,7 +120,15 @@ class HrEmployee(models.Model):
         """
         for rec in self:
             birthday = fields.Date.to_date(rec.birthday)
-            if not rec.use_ethiopic_dob or not birthday:
+            if not birthday:
+                # An empty Gregorian birthday means the old Ethiopic parts are
+                # stale: clear them, or turning the entry back on would show the
+                # previous date while the birthday stays empty.
+                rec.etcal_dob_year = False
+                rec.etcal_dob_month = False
+                rec.etcal_dob_day = False
+                continue
+            if not rec.use_ethiopic_dob:
                 continue
             ethiopic = pcc.ethiopic_from_fixed(
                 pcc.fixed_from_gregorian(
