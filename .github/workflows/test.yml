@@ -23,12 +23,30 @@ jobs:
           for reqfile in requirements.txt test-requirements.txt ; do
               if [ -f ${reqfile} ] ; then
                   result=0
-                  # reject non-comment lines that contain a / (i.e. URLs, relative paths),
+                  # Reject every requirement token that resolves to a URL or a relative
+                  # path -- either one means the dependency is not published on PyPI --
                   # except the fork dependencies this repository intentionally pins:
-                  # addons installed from the trevi-software repositories at a branch,
-                  # which are not published on PyPI yet.
-                  grep "^[^#].*/" ${reqfile} | grep -v "git+https://github.com/trevi-software/" || result=$?
-                  if [ $result -eq 0 ] ; then
+                  # addons installed from the trevi-software repositories at a branch.
+                  #
+                  # Trailing comments are stripped before matching, so an inline comment
+                  # cannot hide a foreign dependency from this check.
+                  while IFS= read -r line || [ -n "${line}" ] ; do
+                      req=${line%%#*}
+                      for token in ${req} ; do
+                          case ${token} in
+                              */*)
+                                  case ${token} in
+                                      git+https://github.com/trevi-software/*) ;;
+                                      *)
+                                          echo "Unreleased dependency in ${reqfile}: ${token}"
+                                          result=1
+                                          ;;
+                                  esac
+                                  ;;
+                          esac
+                      done
+                  done < ${reqfile}
+                  if [ $result -eq 1 ] ; then
                       echo "Unreleased dependencies found in ${reqfile}."
                       exit 1
                   fi
