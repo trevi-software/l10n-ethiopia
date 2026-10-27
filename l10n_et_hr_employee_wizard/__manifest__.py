@@ -1,0 +1,23 @@
+# Copyright (C) 2022 Trevi Software (https://trevi.et)
+# Copyright (C) 2013 Michael Telahun Makonnen <mmakonnen@gmail.com>.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+{
+    "name": "New Employee Wizard - Ethiopia",
+    "summary": "Ethiopian localization of new employee wizard",
+    "version": "19.0.1.0.0",
+    "category": "Localization",
+    "license": "AGPL-3",
+    "author": "TREVI Software, Odoo Community Association (OCA)",
+    "website": "https://github.com/trevi-software/l10n-ethiopia",
+    "depends": [
+        "ethiopic_calendar",
+        "hr_employee_wizard",
+        "l10n_et_hr",
+    ],
+    "data": [
+        "views/hr_recruitment_view.xml",
+        "wizard/hr_employee_wizard_views.xml",
+    ],
+    "installable": True,
+}
